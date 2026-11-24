@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Política de Privacidade · Provintes</title>
+<meta name="description" content="Como a Provintes coleta, usa, guarda e protege os seus dados, de acordo com a LGPD.">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#fff;--bg2:#F4F7FE;--ink:#0A1838;--ink2:#46557A;--ink3:#7D89A6;--line:#E2E8F5;--blue:#2F6BFF;--soft:#EAF1FF;--deep:#0A1D5C;--warn:#FFF4D6;--warnInk:#7A5200;
+  --f-d:"Sora",system-ui,sans-serif;--f-b:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;color-scheme:light}
+@media (prefers-color-scheme:dark){:root{--bg:#060E26;--bg2:#0A1532;--ink:#ECF1FF;--ink2:#AAB7D8;--ink3:#7887AC;--line:#1B2A52;--soft:#12275E;--warn:#3A2C05;--warnInk:#FFD98A;color-scheme:dark}}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:84px}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f-b);font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased}
+a{color:var(--blue)}
+.wrap{max-width:1120px;margin:0 auto;padding:0 clamp(16px,4.5vw,40px)}
+header{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.hd{display:flex;align-items:center;justify-content:space-between;height:68px}
+.logo{display:inline-flex;align-items:center;gap:9px;color:var(--ink);text-decoration:none;font-family:var(--f-d);font-weight:600;font-size:21px;letter-spacing:-.045em}
+.logo svg{width:30px;height:30px}
+.ldot{display:inline-block;width:.2em;height:.2em;border-radius:.05em;background:var(--blue);margin-left:.04em}
+.back{font-weight:600;font-size:14px;text-decoration:none;color:var(--ink2)}
+.back:hover{color:var(--ink)}
+.hero{background:linear-gradient(180deg,var(--bg2),var(--bg));padding:56px 0 28px}
+.k{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--blue)}
+h1{font-family:var(--f-d);font-size:clamp(32px,5vw,46px);line-height:1.08;letter-spacing:-.03em;margin:10px 0 12px}
+.lead{font-size:18px;color:var(--ink2);max-width:720px;margin:0}
+.upd{margin-top:14px;font-size:14px;color:var(--ink3)}
+.grid{display:grid;grid-template-columns:240px minmax(0,1fr);gap:48px;padding:24px 0 72px}
+.toc{position:sticky;top:92px;align-self:start;font-size:14px}
+.toc b{display:block;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink3);margin-bottom:8px}
+.toc a{display:block;padding:5px 0 5px 12px;border-left:2px solid var(--line);color:var(--ink2);text-decoration:none}
+.toc a:hover{color:var(--ink);border-color:var(--blue)}
+article{max-width:760px}
+h2{font-family:var(--f-d);font-size:22px;letter-spacing:-.02em;line-height:1.25;margin:40px 0 10px}
+h2:first-child{margin-top:8px}
+h3{font-size:16px;margin:20px 0 6px}
+p,li{color:var(--ink2)}
+ul{padding-left:20px;margin:8px 0}
+li{margin-bottom:6px}
+strong{color:var(--ink)}
+.box{background:var(--soft);border-radius:16px;padding:18px 20px;margin:14px 0}
+.box p{margin:0}
+table{width:100%;border-collapse:collapse;font-size:14.5px;margin:12px 0}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{color:var(--ink);font-weight:600;background:var(--bg2)}
+td{color:var(--ink2)}
+.preencher{background:var(--warn);color:var(--warnInk);padding:1px 6px;border-radius:6px;font-weight:600}
+footer{border-top:1px solid var(--line);padding:28px 0;font-size:14px;color:var(--ink3)}
+.ft{display:flex;flex-wrap:wrap;gap:16px;align-items:center;justify-content:space-between}
+.ft nav{display:flex;gap:18px;flex-wrap:wrap}.ft nav a{color:var(--ink2);text-decoration:none}
+@media (max-width:860px){.grid{grid-template-columns:1fr;gap:8px}.toc{position:static;display:none}table{font-size:13.5px}th,td{padding:8px}}
+@media print{header,.toc,footer{display:none}.grid{display:block}.preencher{background:none}}
+</style>
+</head>
+<body>
+<header><div class="wrap hd">
+  <a class="logo" href="index.html" aria-label="Provintes, página inicial"><svg viewBox="4 3.5 57 57" aria-hidden="true"><rect x="5" y="40" width="9" height="17" rx="4.5" fill="#6B95FF"/><rect x="18" y="29" width="9" height="28" rx="4.5" fill="#2F6BFF"/><path d="M31 11a4.5 4.5 0 0 1 4.5-4.5H40v46a4.5 4.5 0 0 1-9 0Z" fill="currentColor"/><path d="M42 6.5h3a15 15 0 0 1 0 30h-3Z" fill="#2F6BFF"/></svg><span>provintes<i class="ldot"></i></span></a>
+  <a class="back" href="index.html">← Voltar ao site</a>
+</div></header>
+
+<section class="hero"><div class="wrap">
+  <div class="k">Privacidade</div>
+  <h1>Política de Privacidade</h1>
+  <p class="lead">Como a Provintes coleta, usa, guarda e protege os seus dados, em linguagem simples e de acordo com a Lei Geral de Proteção de Dados (LGPD, Lei nº 13.709/2018).</p>
+  <p class="upd">Última atualização: 24 de novembro de 2026</p>
+</div></section>
+
+<div class="wrap grid">
+<nav class="toc" aria-label="Nesta página">
+  <b>Nesta página</b>
+  <a href="#quem">1. Quem somos</a>
+  <a href="#dados">2. Dados que coletamos</a>
+  <a href="#uso">3. Para que usamos</a>
+  <a href="#ia">4. Inteligência artificial</a>
+  <a href="#whatsapp">5. WhatsApp</a>
+  <a href="#compartilhamento">6. Com quem compartilhamos</a>
+  <a href="#internacional">7. Dados fora do Brasil</a>
+  <a href="#guarda">8. Por quanto tempo guardamos</a>
+  <a href="#seguranca">9. Segurança</a>
+  <a href="#direitos">10. Seus direitos</a>
+  <a href="#exclusao">11. Como excluir seus dados</a>
+  <a href="#cookies">12. Cookies</a>
+  <a href="#menores">13. Menores de idade</a>
+  <a href="#mudancas">14. Mudanças</a>
+  <a href="#contato">15. Contato</a>
+</nav>
+
+<article>
+<h2 id="quem">1. Quem somos</h2>
+<p>A <strong>Provintes</strong> é uma plataforma de gestão de despesas para empresas. Você fotografa notas fiscais, boletos e comprovantes de Pix, e a Provintes lê, organiza e lança tudo, inclusive pelo WhatsApp, com a ajuda da assistente <strong>A.N.A.B</strong>.</p>
+<p>A empresa responsável pelo tratamento dos dados (a "controladora", nos termos da LGPD) é:</p>
+<div class="box"><p><strong>Provintes</strong><br>E-mail de privacidade: <a href="mailto:conexaoa2digital@gmail.com">conexaoa2digital@gmail.com</a><br>WhatsApp: <a href="https://wa.me/5577981152772">(77) 9 8115-2772</a></p></div>
+
+<h2 id="dados">2. Dados que coletamos</h2>
+<h3>Quando você cria uma conta ou usa o sistema</h3>
+<ul>
+  <li><strong>Cadastro:</strong> nome, e-mail, telefone, cargo e os dados da sua empresa (nome, CNPJ, áreas e departamentos).</li>
+  <li><strong>Documentos que você envia:</strong> fotos e arquivos de notas fiscais, boletos, comprovantes de Pix e outros documentos de despesa, com as informações que aparecem neles (valores, datas, fornecedores, CNPJ/CPF de emitentes, códigos de barras).</li>
+  <li><strong>Dados financeiros da empresa:</strong> lançamentos, categorias, vencimentos, pagamentos e relatórios gerados a partir dos documentos.</li>
+  <li><strong>Dados de uso:</strong> data e hora de acesso, tipo de aparelho e navegador, e as ações feitas no sistema, para segurança e melhoria do serviço.</li>
+</ul>
+<h3>Quando você fala com a Provintes pelo WhatsApp</h3>
+<ul>
+  <li>Seu número de WhatsApp e o nome do seu perfil.</li>
+  <li>O conteúdo das mensagens: textos, áudios, fotos, documentos e localização que você decidir enviar.</li>
+  <li>A transcrição em texto dos áudios que você mandar.</li>
+  <li>Informações que você nos contar na conversa, como o nome da sua empresa e como conheceu a Provintes.</li>
+</ul>
+<p><strong>Não coletamos</strong> senhas de bancos, dados de cartão de crédito pelo WhatsApp, nem dados sensíveis (saúde, religião, origem racial e outros do art. 11 da LGPD). Por favor, não envie esse tipo de informação.</p>
+
+<h2 id="uso">3. Para que usamos os seus dados</h2>
+<table>
+  <thead><tr><th>Finalidade</th><th>Base legal (LGPD, art. 7º)</th></tr></thead>
+  <tbody>
+    <tr><td>Criar e manter sua conta e prestar o serviço contratado: ler documentos, organizar despesas, avisar vencimentos, gerar relatórios.</td><td>Execução de contrato</td></tr>
+    <tr><td>Atender você pelo WhatsApp, tirar dúvidas e apresentar os planos.</td><td>Procedimentos preliminares a contrato, a seu pedido</td></tr>
+    <tr><td>Cobrança, emissão de notas e obrigações fiscais e contábeis.</td><td>Cumprimento de obrigação legal</td></tr>
+    <tr><td>Segurança da conta, prevenção a fraudes e registros de acesso.</td><td>Legítimo interesse e obrigação legal (Marco Civil da Internet)</td></tr>
+    <tr><td>Melhorar o sistema e corrigir erros, com dados agregados.</td><td>Legítimo interesse</td></tr>
+    <tr><td>Enviar novidades e conteúdos da Provintes.</td><td>Consentimento, que você pode retirar a qualquer momento</td></tr>
+  </tbody>
+</table>
+<p>Não vendemos seus dados, e não os usamos para anúncios de terceiros.</p>
+
+<h2 id="ia">4. Inteligência artificial</h2>
+<p>A Provintes usa inteligência artificial para:</p>
+<ul>
+  <li><strong>Ler documentos:</strong> extrair automaticamente valor, data, fornecedor e outros campos das notas, boletos e comprovantes.</li>
+  <li><strong>A.N.A.B:</strong> a assistente virtual que responde mensagens no WhatsApp e no sistema. Ela se apresenta como assistente virtual, e quando não sabe responder ou você pedir, a conversa passa para uma pessoa da equipe.</li>
+  <li><strong>Transcrever áudios</strong> enviados pelo WhatsApp.</li>
+</ul>
+<p>Para isso, o conteúdo necessário é processado por fornecedores de IA contratados (veja a seção 6). Esses fornecedores atuam apenas sob as nossas instruções e, pelas condições contratuais dos serviços que utilizamos, <strong>não usam seus dados para treinar os modelos deles</strong>. As decisões importantes sobre a sua conta e sobre pagamentos são sempre suas.</p>
+
+<h2 id="whatsapp">5. WhatsApp</h2>
+<p>O atendimento pelo WhatsApp usa a <strong>Plataforma do WhatsApp Business</strong>, oferecida pela Meta. Quando você nos escreve:</p>
+<ul>
+  <li>A mensagem passa pela infraestrutura da Meta e chega ao nosso sistema, onde fica guardada para que possamos responder e manter o histórico do atendimento.</li>
+  <li>Apenas a equipe autorizada da Provintes acessa as conversas, num painel com login individual.</li>
+  <li>Se você já é cliente, suas conversas com a A.N.A.B sobre a sua empresa ficam reservadas e só são vistas pela equipe quando você pede ajuda de uma pessoa.</li>
+</ul>
+<p>O uso do WhatsApp também segue os termos e a política de privacidade do próprio WhatsApp. Se não quiser mais receber mensagens da Provintes, basta responder <strong>"SAIR"</strong> ou nos pedir.</p>
+
+<h2 id="compartilhamento">6. Com quem compartilhamos</h2>
+<p>Compartilhamos dados apenas com fornecedores que nos ajudam a prestar o serviço (os "operadores"), sempre no mínimo necessário:</p>
+<table>
+  <thead><tr><th>Fornecedor</th><th>Para quê</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Meta Platforms</strong> (WhatsApp Business Platform)</td><td>Enviar e receber mensagens do WhatsApp.</td></tr>
+    <tr><td><strong>Supabase</strong></td><td>Hospedagem do banco de dados, dos arquivos e do login do sistema e do painel de atendimento.</td></tr>
+    <tr><td><strong>Anthropic</strong> (Claude)</td><td>Inteligência artificial da A.N.A.B e leitura de documentos.</td></tr>
+    <tr><td><strong>OpenAI</strong></td><td>Transcrição de áudios em texto.</td></tr>
+    <tr><td><strong>GitHub</strong></td><td>Hospedagem do site da Provintes. O site não guarda dados pessoais seus.</td></tr>
+  </tbody>
+</table>
+<p>Também podemos compartilhar dados quando a lei exigir, por ordem judicial ou pedido de autoridade competente, e com o seu contador ou outras pessoas que <strong>você</strong> autorizar dentro do sistema.</p>
+
+<h2 id="internacional">7. Dados fora do Brasil</h2>
+<p>Alguns dos fornecedores acima têm servidores fora do Brasil, principalmente nos Estados Unidos. Essa transferência internacional é feita para executar o serviço que você contratou ou pediu (LGPD, art. 33), com fornecedores que adotam cláusulas contratuais e medidas de segurança compatíveis com a LGPD.</p>
+
+<h2 id="guarda">8. Por quanto tempo guardamos</h2>
+<ul>
+  <li><strong>Dados da conta e documentos de despesa:</strong> enquanto a conta estiver ativa. Depois do cancelamento, por até 90 dias para você poder exportar, e então excluímos, exceto o que a lei mandar guardar.</li>
+  <li><strong>Documentos fiscais e de cobrança da sua assinatura:</strong> pelo prazo exigido pela legislação fiscal (em geral, 5 anos).</li>
+  <li><strong>Conversas de WhatsApp com quem não virou cliente:</strong> até 12 meses após a última mensagem.</li>
+  <li><strong>Registros de acesso:</strong> 6 meses, como exige o Marco Civil da Internet.</li>
+</ul>
+
+<h2 id="seguranca">9. Segurança</h2>
+<p>Usamos conexão criptografada (HTTPS), controle de acesso por login individual, regras no banco de dados que limitam quem vê cada informação, e chaves de acesso guardadas em cofres seguros, nunca no código. Nenhum sistema é 100% invulnerável, mas, se acontecer um incidente que possa trazer risco a você, avisaremos você e a ANPD, como manda a lei.</p>
+
+<h2 id="direitos">10. Seus direitos</h2>
+<p>Pela LGPD (art. 18), você pode, a qualquer momento:</p>
+<ul>
+  <li>Confirmar se tratamos seus dados e ter acesso a eles.</li>
+  <li>Corrigir dados incompletos, inexatos ou desatualizados.</li>
+  <li>Pedir anonimização, bloqueio ou exclusão de dados desnecessários ou tratados em desacordo com a lei.</li>
+  <li>Pedir a portabilidade dos seus dados para outro fornecedor.</li>
+  <li>Pedir a exclusão dos dados tratados com o seu consentimento.</li>
+  <li>Saber com quem compartilhamos seus dados.</li>
+  <li>Retirar o seu consentimento.</li>
+  <li>Reclamar à Autoridade Nacional de Proteção de Dados (ANPD).</li>
+</ul>
+<p>Para exercer qualquer um deles, fale com a gente pelos canais da seção 15. Respondemos em até 15 dias.</p>
+
+<h2 id="exclusao">11. Como excluir seus dados</h2>
+<div class="box"><p>Você pode pedir a exclusão dos seus dados de três formas:</p></div>
+<ul>
+  <li><strong>Pelo WhatsApp:</strong> mande <strong>"EXCLUIR MEUS DADOS"</strong> para o número da Provintes, <a href="https://wa.me/5577981152772">(77) 9 8115-2772</a>.</li>
+  <li><strong>Por e-mail:</strong> escreva para <a href="mailto:conexaoa2digital@gmail.com">conexaoa2digital@gmail.com</a> com o assunto "Exclusão de dados", informando o seu nome e o número de WhatsApp ou e-mail usado.</li>
+  <li><strong>Pelo sistema:</strong> o administrador da conta pode cancelar a assinatura e pedir a exclusão em <strong>Configurações</strong>.</li>
+</ul>
+<p>Confirmamos quem você é, excluímos os dados em até 15 dias e avisamos quando terminar. Guardamos apenas o que a lei nos obriga a manter (como documentos fiscais da sua assinatura), pelo prazo legal.</p>
+
+<h2 id="cookies">12. Cookies e armazenamento no navegador</h2>
+<p>O sistema usa o armazenamento do navegador para manter você conectado e lembrar preferências, como tema claro ou escuro, valores escondidos e a personalização da tela inicial. O site da Provintes não usa cookies de publicidade. Você pode apagar esses dados nas configurações do seu navegador a qualquer momento.</p>
+
+<h2 id="menores">13. Menores de idade</h2>
+<p>A Provintes é feita para empresas e não se destina a menores de 18 anos. Não coletamos dados de crianças e adolescentes de forma intencional.</p>
+
+<h2 id="mudancas">14. Mudanças nesta política</h2>
+<p>Podemos atualizar esta política quando o serviço ou a lei mudarem. A data no topo da página sempre mostra a versão em vigor. Se a mudança for importante, avisaremos pelo sistema, por e-mail ou pelo WhatsApp.</p>
+
+<h2 id="contato">15. Contato e encarregado de dados</h2>
+<div class="box"><p>Encarregado pelo tratamento de dados (DPO): Equipe de privacidade da Provintes<br>E-mail: <a href="mailto:conexaoa2digital@gmail.com">conexaoa2digital@gmail.com</a><br>WhatsApp: <a href="https://wa.me/5577981152772">(77) 9 8115-2772</a></p></div>
+</article>
+</div>
+
+<footer><div class="wrap ft">
+  <span>© 2026 Provintes</span>
+  <nav aria-label="Rodapé"><a href="index.html">Início</a><a href="https://conexaoa2digital-source.github.io/teste-conexo/precos.html">Preços</a><a href="privacidade.html">Privacidade</a><a href="index.html#contato">Contato</a></nav>
+</div></footer>
+</body>
+</html>

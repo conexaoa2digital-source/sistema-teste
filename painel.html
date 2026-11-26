@@ -502,7 +502,7 @@ function apiDemo() {
   msg('c1', 'saida', 'anab', 'Oi, Maria! 😊 É simples: você tira foto da nota, boleto ou Pix e manda aqui no WhatsApp. A Provintes lança tudo sozinha e te avisa antes de vencer. Os planos começam em R$ 119,90 por mês, e dá pra testar grátis por 7 dias. Quer conhecer os planos?', 25);
   msg('c1', 'entrada', 'contato', null, 12, { tipo: 'audio', transcricao: 'Tenho três lojas de roupa aqui em Vitória da Conquista. Queria falar com alguém sobre o plano Plus.', midia_path: 'demo/audio.ogg', midia_mime: 'audio/ogg' });
   msg('c1', 'saida', 'anab', 'Que legal, Maria! Já chamei a equipe da Provintes. Alguém continua com você aqui mesmo, em instantes.', 12);
-  msg('c1', 'sistema', 'sistema', 'A.N.A.B passou a conversa para a equipe · quer o plano Plus para 3 lojas', 12);
+  msg('c1', 'sistema', 'sistema', 'ANAB passou a conversa para a equipe · quer o plano Plus para 3 lojas', 12);
   msg('c2', 'entrada', 'contato', 'Boa tarde. Funciona pra MEI?', 180); msg('c2', 'saida', 'anab', 'Boa tarde, João! Funciona sim: a Provintes serve para empresa de qualquer tamanho, inclusive MEI. O plano Básico costuma ser suficiente. Quer testar grátis por 7 dias?', 180);
   msg('c2', 'entrada', 'contato', 'Obrigado! Vou testar os 7 dias.', 175); msg('c2', 'saida', 'anab', 'Combinado! Me diz o seu nome completo e o nome da empresa que eu já peço o seu acesso. 🙂', 175);
   msg('c3', 'entrada', 'contato', 'Funciona pelo celular também?', 40); msg('c3', 'saida', 'anab', 'Funciona sim! Pelo navegador do celular ou instalando como app, sem precisar de loja. E pelo WhatsApp você já manda as notas. Quer testar?', 40);
@@ -510,7 +510,7 @@ function apiDemo() {
   msg('c4', 'entrada', 'contato', 'O relatório do mês saiu com uma categoria errada, podem ver?', 3000); msg('c4', 'saida', 'equipe', 'Claro! Já corrigi a categoria e reenviei o relatório no seu e-mail.', 2990, { autor_id: 'u2' });
   msg('c5', 'entrada', 'contato', 'Vou ver com meu sócio e te falo.', 1800);
   for (const c of db.conversas) { const ms = db.mensagens.filter(m => m.conversa_id === c.id); const u = ms[ms.length - 1], e = ms.filter(m => m.direcao === 'entrada').pop(); c.ultima_msg_em = u.criado_em; c.ultima_msg_texto = prev(u); c.ultima_entrada_em = e ? e.criado_em : null; }
-  function prev(m) { if (m.tipo === 'audio') return '🎤 Áudio' + (m.transcricao ? ' · ' + m.transcricao : ''); if (m.tipo === 'imagem') return '📷 Foto' + (m.texto ? ' · ' + m.texto : ''); if (m.tipo === 'documento') return '📄 ' + (m.midia_nome || 'Arquivo'); return (m.autor === 'anab' ? 'A.N.A.B: ' : m.autor === 'equipe' ? (db.equipe.find(e => e.user_id === m.autor_id) || EU).nome + ': ' : '') + (m.texto || ''); }
+  function prev(m) { if (m.tipo === 'audio') return '🎤 Áudio' + (m.transcricao ? ' · ' + m.transcricao : ''); if (m.tipo === 'imagem') return '📷 Foto' + (m.texto ? ' · ' + m.texto : ''); if (m.tipo === 'documento') return '📄 ' + (m.midia_nome || 'Arquivo'); return (m.autor === 'anab' ? 'ANAB: ' : m.autor === 'equipe' ? (db.equipe.find(e => e.user_id === m.autor_id) || EU).nome + ': ' : '') + (m.texto || ''); }
   const visivel = c => { const k = db.contatos.find(x => x.id === c.contato_id); return k.tipo === 'lead' || ['precisa_voce', 'humano'].includes(c.status); };
   const comContato = c => ({ ...c, contato: { ...db.contatos.find(k => k.id === c.contato_id) } });
   const ouvintes = []; const emit = (t, o) => setTimeout(() => ouvintes.forEach(f => f(t, o)), 60);
@@ -571,7 +571,7 @@ function apiDemo() {
         const chama = tipo === 'humano' || /desconto|emitem/.test(m.texto || '');
         const r = tipo === 'audio' ? 'Dá sim! Na Provintes você cria um departamento para cada médico e cada nota fica no lugar certo. Quer testar grátis por 7 dias?' : chama ? 'Claro! Já chamei a equipe da Provintes. Alguém continua com você aqui mesmo, em instantes. 🙂' : 'Oi, Carla! Os planos começam em R$ 119,90 por mês, e você testa grátis por 7 dias. Quer que eu te explique como funciona?';
         const a = msg('cx', 'saida', 'anab', r, 0); a.status = 'enviada'; Object.assign(c, { ultima_msg_em: a.criado_em, ultima_msg_texto: prev(a) }); emit('mensagem', a);
-        if (chama) { Object.assign(c, { status: 'precisa_voce', motivo: tipo === 'humano' ? 'pediu para falar com um atendente' : 'pergunta que a A.N.A.B não sabe responder' }); const s = msg('cx', 'sistema', 'sistema', 'A.N.A.B passou a conversa para a equipe · ' + c.motivo, 0); emit('mensagem', s); }
+        if (chama) { Object.assign(c, { status: 'precisa_voce', motivo: tipo === 'humano' ? 'pediu para falar com um atendente' : 'pergunta que a ANAB não sabe responder' }); const s = msg('cx', 'sistema', 'sistema', 'ANAB passou a conversa para a equipe · ' + c.motivo, 0); emit('mensagem', s); }
         emit('conversa', c);
       }, 1600);
     }
@@ -668,7 +668,7 @@ function fecharMenu() { if (S.menu) { S.menu.remove(); S.menu = null; S.menuDe =
 function itensMenu(nome) {
   const c = S.convs.get(S.sel);
   if (nome === 'geral') return [
-    ...(isAdmin() ? [{ t: 'A.N.A.B e respostas prontas', icone: 'spark', f: () => { S.view = 'anab'; render(); } }, { t: 'Equipe', icone: 'users', f: () => { S.view = 'equipe'; render(); } }] : []),
+    ...(isAdmin() ? [{ t: 'ANAB e respostas prontas', icone: 'spark', f: () => { S.view = 'anab'; render(); } }, { t: 'Equipe', icone: 'users', f: () => { S.view = 'equipe'; render(); } }] : []),
     { t: 'Minha conta', icone: 'user', f: () => { S.view = 'conta'; render(); } },
     { t: 'Sair', icone: 'out', f: async () => { await API.sair(); location.reload(); } }];
   if (nome === 'sim') return [{ t: 'Lead faz uma pergunta', f: () => API.simular('lead') }, { t: 'Lead manda um áudio', f: () => API.simular('audio') }, { t: 'Lead pede um atendente', f: () => API.simular('humano') }];
@@ -684,7 +684,7 @@ function itensMenu(nome) {
    lista de conversas
    ===================================================================== */
 const ABAS = [['todas', 'Todas'], ['leads', 'Leads'], ['clientes', 'Clientes'], ['encerradas', 'Encerradas']];
-const GRUPOS = [['precisa_voce', 'Precisa de você'], ['humano', 'Em atendimento'], ['anab', 'A.N.A.B respondendo']];
+const GRUPOS = [['precisa_voce', 'Precisa de você'], ['humano', 'Em atendimento'], ['anab', 'ANAB respondendo']];
 const leadNovo = k => k.tipo === 'lead' && k.criado_em && Date.now() - new Date(k.criado_em).getTime() < 864e5;
 const tipoTxt = k => k.tipo === 'cliente' ? 'Cliente' : leadNovo(k) ? 'Lead novo' : 'Lead';
 const tipoTagClaro = k => `<span class="tgc ${k.tipo === 'cliente' ? 'tgc-cli' : leadNovo(k) ? 'tgc-novo' : 'tgc-lead'}">${tipoTxt(k)}</span>`;
@@ -704,7 +704,7 @@ function renderLista() {
   if (!el.dataset.ok) {
     el.dataset.ok = 1;
     el.innerHTML = `<div class="lista-top">
-        <div class="t">${MARK}<h1>Conversas</h1><span class="sp"></span><span class="off" id="anabOff" hidden>A.N.A.B desligada</span>
+        <div class="t">${MARK}<h1>Conversas</h1><span class="sp"></span><span class="off" id="anabOff" hidden>ANAB desligada</span>
           <button type="button" class="ico-s" data-menu="geral" aria-label="Menu" aria-haspopup="menu" aria-expanded="false">${ic('dots')}</button></div>
         <label class="busca">${ic('search')}<span class="sr">Buscar</span><input id="busca" type="search" placeholder="Buscar"></label>
         <div class="abas" id="abas" role="tablist" aria-label="Filtrar conversas"></div>
@@ -756,7 +756,7 @@ function estado(c) {
   if (c.status === 'precisa_voce') return ['need', 'Chamou você · ' + (c.motivo || 'quer falar com a equipe')];
   if (c.status === 'humano') return ['', c.atendente_id === S.eu.user_id ? 'Você está atendendo' : nomeEquipe(c.atendente_id) + ' está atendendo'];
   if (c.status === 'encerrada') return ['', 'Conversa encerrada'];
-  return ['', 'A.N.A.B está respondendo'];
+  return ['', 'ANAB está respondendo'];
 }
 function renderChat() {
   const el = $('#chat'); if (!el) return;
@@ -765,7 +765,7 @@ function renderChat() {
   const [cls, txt0] = estado(c);
   const prim = c.status === 'precisa_voce' ? '<button type="button" class="btn pri pill-b" data-a="assumir">Assumir conversa</button>'
     : c.status === 'anab' ? '<button type="button" class="btn pill-b" data-a="assumir">Assumir conversa</button>'
-      : c.status === 'humano' ? '<button type="button" class="btn pill-b" data-a="devolver">Devolver à A.N.A.B</button>'
+      : c.status === 'humano' ? '<button type="button" class="btn pill-b" data-a="devolver">Devolver à ANAB</button>'
         : '<button type="button" class="btn pill-b" data-a="reabrir">Reabrir</button>';
   el.innerHTML = `<header class="chat-top">
       <button type="button" class="ico-s voltar" data-a="voltar" aria-label="Voltar para a lista">${ic('back')}</button>
@@ -807,7 +807,7 @@ function renderMsgs(rolar) {
     const cls = m.direcao === 'entrada' ? 'ent' : m.autor === 'anab' ? 'sai anab' : 'sai eq';
     const chave = m.direcao + ':' + m.autor + ':' + (m.autor_id || '');
     const novo = chave !== antes; antes = chave;
-    const quem = m.autor === 'anab' ? 'A.N.A.B' : m.autor === 'equipe' ? (m.autor_id === S.eu.user_id ? 'Você' : nomeEquipe(m.autor_id)) : '';
+    const quem = m.autor === 'anab' ? 'ANAB' : m.autor === 'equipe' ? (m.autor_id === S.eu.user_id ? 'Você' : nomeEquipe(m.autor_id)) : '';
     h += `<div class="b ${cls}${novo ? ' rabo' : ''}"><div class="bx">${novo && quem ? `<div class="autor">${esc(quem)}</div>` : ''}${corpo(m)}<span class="meta">${hora(m.criado_em)}${m.direcao === 'saida' ? statusIcon(m) : ''}</span></div></div>`;
   }
   box.innerHTML = h || '<div class="vazio">Sem mensagens ainda.</div>';
@@ -859,7 +859,7 @@ async function enviar() {
   try {
     if (S.anexo) { const a = S.anexo; await API.enviarMidia(c.id, a.file, { nome: a.nome, mime: a.mime, legenda: texto || null }); S.anexo = null; }
     else await API.enviarTexto(c.id, texto);
-    renderComp(); $('#txt') && $('#txt').focus(); if (assumiu) toast('Você assumiu a conversa. A A.N.A.B fica quieta aqui.');
+    renderComp(); $('#txt') && $('#txt').focus(); if (assumiu) toast('Você assumiu a conversa. A ANAB fica quieta aqui.');
   } catch (e) { toast(esc(e.message), true); b.disabled = false; }
 }
 
@@ -963,12 +963,12 @@ async function acao(a) {
   try {
     if (a === 'voltar') { S.sel = null; S.fichaAberta = false; $('#app').classList.remove('em-chat'); renderItens(); renderChat(); renderFicha(); }
     else if (a === 'ficha') { S.fichaAberta = !S.fichaAberta; renderFicha(); if (S.fichaAberta) setTimeout(() => { const n = $('#kNome'); n && n.focus({ preventScroll: true }); }, 50); }
-    else if (a === 'assumir') { await API.atualizarConversa(c.id, { status: 'humano', atendente_id: S.eu.user_id, motivo: null }); toast('Você assumiu. A A.N.A.B fica quieta nesta conversa.'); }
-    else if (a === 'devolver') { await API.atualizarConversa(c.id, { status: 'anab', atendente_id: null, motivo: null }); toast('A A.N.A.B voltou a responder esta conversa.'); }
+    else if (a === 'assumir') { await API.atualizarConversa(c.id, { status: 'humano', atendente_id: S.eu.user_id, motivo: null }); toast('Você assumiu. A ANAB fica quieta nesta conversa.'); }
+    else if (a === 'devolver') { await API.atualizarConversa(c.id, { status: 'anab', atendente_id: null, motivo: null }); toast('A ANAB voltou a responder esta conversa.'); }
     else if (a === 'reabrir') await API.atualizarConversa(c.id, { status: 'anab', atendente_id: null });
-    else if (a === 'encerrar') { await API.atualizarConversa(c.id, { status: 'encerrada', atendente_id: null, motivo: null }); toast('Conversa encerrada. Se a pessoa escrever de novo, ela volta para a A.N.A.B.'); }
+    else if (a === 'encerrar') { await API.atualizarConversa(c.id, { status: 'encerrada', atendente_id: null, motivo: null }); toast('Conversa encerrada. Se a pessoa escrever de novo, ela volta para a ANAB.'); }
     else if (a === 'cliente' || a === 'lead') {
-      if (a === 'cliente' && !confirm('Marcar como cliente?\n\nPor privacidade, as conversas de clientes com a A.N.A.B deixam de aparecer aqui. Elas só voltam quando o cliente pedir ajuda de uma pessoa.')) return;
+      if (a === 'cliente' && !confirm('Marcar como cliente?\n\nPor privacidade, as conversas de clientes com a ANAB deixam de aparecer aqui. Elas só voltam quando o cliente pedir ajuda de uma pessoa.')) return;
       await API.atualizarContato(c.contato.id, { tipo: a }); c.contato.tipo = a;
       if (a === 'cliente' && !['precisa_voce', 'humano'].includes(c.status)) { S.convs.delete(c.id); S.sel = null; S.fichaAberta = false; render(); toast('Marcado como cliente.'); }
       else { renderItens(); renderFicha(); toast(a === 'cliente' ? 'Marcado como cliente.' : 'Voltou a ser lead.'); }
@@ -987,8 +987,8 @@ async function acao(a) {
    ===================================================================== */
 async function telaAnab(box) {
   const cfg = S.config = await API.config(); S.respostas = await API.respostas();
-  box.innerHTML = `<h1>A.N.A.B</h1>
-    <section class="card"><label class="sw"><input type="checkbox" id="cAtiva" ${cfg.anab_ativa ? 'checked' : ''}><span><b>A.N.A.B responde os leads</b><small>Desligada, todas as mensagens esperam alguém da equipe.</small></span></label></section>
+  box.innerHTML = `<h1>ANAB</h1>
+    <section class="card"><label class="sw"><input type="checkbox" id="cAtiva" ${cfg.anab_ativa ? 'checked' : ''}><span><b>ANAB responde os leads</b><small>Desligada, todas as mensagens esperam alguém da equipe.</small></span></label></section>
     <section class="card"><h2>O que ela sabe sobre a Provintes</h2>
       <p>Ela responde só com base neste texto. Mudou um preço ou um plano? Edite aqui e salve.</p>
       <textarea class="in" id="cSabe" rows="10">${esc(cfg.anab_conhecimento || '')}</textarea>
@@ -1000,7 +1000,7 @@ async function telaAnab(box) {
       <div><button type="button" class="btn" id="rAdd">Adicionar resposta</button></div></section>`;
   const lista = () => { $('#rLista').innerHTML = S.respostas.map(r => `<div class="rr"><div class="sp"><b>${esc(r.titulo)}</b><p>${esc(r.texto)}</p></div><button type="button" class="ico-s" data-rdel="${r.id}" aria-label="Apagar ${esc(r.titulo)}">${ic('trash')}</button></div>`).join('') || '<p>Nenhuma resposta pronta ainda.</p>'; };
   lista();
-  $('#cAtiva').addEventListener('change', async e => { try { await API.salvarConfig({ anab_ativa: e.target.checked }); S.config.anab_ativa = e.target.checked; toast(e.target.checked ? 'A.N.A.B ligada' : 'A.N.A.B desligada'); } catch (x) { toast(esc(x.message), true); } });
+  $('#cAtiva').addEventListener('change', async e => { try { await API.salvarConfig({ anab_ativa: e.target.checked }); S.config.anab_ativa = e.target.checked; toast(e.target.checked ? 'ANAB ligada' : 'ANAB desligada'); } catch (x) { toast(esc(x.message), true); } });
   $('#cSalvar').addEventListener('click', async () => { try { await API.salvarConfig({ anab_conhecimento: $('#cSabe').value, alerta_numero: $('#cAlerta').value.replace(/\D/g, '') || null }); toast('Salvo'); } catch (x) { toast(esc(x.message), true); } });
   $('#rAdd').addEventListener('click', async () => { const titulo = $('#rTit').value.trim(), texto = $('#rTxt').value.trim(); if (!titulo || !texto) return toast('Preencha título e texto.', true); try { await API.salvarResposta({ titulo, texto }); S.respostas = await API.respostas(); $('#rTit').value = $('#rTxt').value = ''; lista(); } catch (x) { toast(esc(x.message), true); } });
   box.onclick = async e => { const d = e.target.closest('[data-rdel]'); if (!d || !confirm('Apagar esta resposta pronta?')) return; try { await API.apagarResposta(d.dataset.rdel); S.respostas = await API.respostas(); lista(); } catch (x) { toast(esc(x.message), true); } };
@@ -1010,7 +1010,7 @@ async function telaEquipe(box) {
   box.innerHTML = `<h1>Equipe</h1>
     <section class="card"><h2>Quem entra no painel</h2><div>${S.equipe.map(p => `<div class="rr" style="align-items:center"><span class="av" aria-hidden="true">${esc(ini(p.nome))}</span><div class="sp" style="min-width:0"><b>${esc(p.nome)}${p.user_id === S.eu.user_id ? ' (você)' : ''}</b><p>${esc(p.email)}${p.ativo ? '' : ' · desativado'}</p></div>
         ${p.user_id === S.eu.user_id ? `<span class="pill p-gray">${p.papel === 'admin' ? 'Administrador(a)' : 'Atendente'}</span>` : `<label><span class="sr">Acesso de ${esc(p.nome)}</span><select class="in" data-papel="${p.user_id}"><option value="admin" ${p.papel === 'admin' ? 'selected' : ''}>Administrador(a)</option><option value="atendente" ${p.papel !== 'admin' ? 'selected' : ''}>Atendente</option></select></label><button type="button" class="btn" data-ativo="${p.user_id}" data-v="${p.ativo ? 0 : 1}">${p.ativo ? 'Desativar' : 'Reativar'}</button>`}</div>`).join('')}</div>
-      <p><b>Administrador(a)</b> mexe na A.N.A.B, nas respostas prontas e na equipe. <b>Atendente</b> só responde conversas.</p></section>
+      <p><b>Administrador(a)</b> mexe na ANAB, nas respostas prontas e na equipe. <b>Atendente</b> só responde conversas.</p></section>
     <section class="card"><h2>Adicionar pessoa</h2>
       <div class="grid2"><label class="campo">Nome<input class="in" id="eNome"></label><label class="campo">E-mail<input class="in" id="eEmail" type="email"></label></div>
       <label class="campo">Acesso<select class="in" id="ePapel"><option value="atendente">Atendente</option><option value="admin">Administrador(a)</option></select></label>
@@ -1026,13 +1026,13 @@ async function telaEquipe(box) {
 function telaConta(box) {
   box.innerHTML = `<h1>Minha conta</h1>
     <section class="card"><h2>${esc(S.eu.nome)}</h2><p>${esc(S.eu.email)} · ${S.eu.papel === 'admin' ? 'Administrador(a)' : 'Atendente'}</p></section>
-    <section class="card"><h2>Avisos no computador</h2><p>Receba um aviso quando a A.N.A.B chamar a equipe, mesmo com o painel em outra aba.</p><div><button type="button" class="btn" id="nPerm">Ativar avisos</button></div></section>
+    <section class="card"><h2>Avisos no computador</h2><p>Receba um aviso quando a ANAB chamar a equipe, mesmo com o painel em outra aba.</p><div><button type="button" class="btn" id="nPerm">Ativar avisos</button></div></section>
     <section class="card"><h2>Trocar senha</h2>
       <div class="grid2"><label class="campo">Nova senha<input class="in" type="password" id="s1" autocomplete="new-password"></label><label class="campo">Repita a nova senha<input class="in" type="password" id="s2" autocomplete="new-password"></label></div>
       <div><button type="button" class="btn" id="sTroca">Trocar senha</button></div></section>
     <div><button type="button" class="btn" id="sSair">${ic('out')}Sair do painel</button></div>`;
   $('#sTroca').addEventListener('click', async () => { const a = $('#s1').value; if (a.length < 8) return toast('A senha precisa de pelo menos 8 caracteres.', true); if (a !== $('#s2').value) return toast('As senhas não são iguais.', true); try { await API.trocarSenha(a); $('#s1').value = $('#s2').value = ''; toast('Senha trocada'); } catch (x) { toast(esc(x.message), true); } });
-  $('#nPerm').addEventListener('click', async () => { if (!('Notification' in window)) return toast('Este navegador não mostra avisos.', true); const p = await Notification.requestPermission(); toast(p === 'granted' ? 'Pronto! Você recebe um aviso quando a A.N.A.B chamar a equipe.' : 'Os avisos ficaram bloqueados.', p !== 'granted'); });
+  $('#nPerm').addEventListener('click', async () => { if (!('Notification' in window)) return toast('Este navegador não mostra avisos.', true); const p = await Notification.requestPermission(); toast(p === 'granted' ? 'Pronto! Você recebe um aviso quando a ANAB chamar a equipe.' : 'Os avisos ficaram bloqueados.', p !== 'granted'); });
   $('#sSair').addEventListener('click', async () => { await API.sair(); location.reload(); });
 }
 

@@ -1,0 +1,1091 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta name="robots" content="noindex,nofollow">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Provintes · Conversas</title>
+<meta name="theme-color" content="#0B1F4D">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect width='48' height='48' rx='13' fill='%230B1F4D'/%3E%3Cg transform='translate(6.2 6.6) scale(.56)'%3E%3Crect x='5' y='40' width='9' height='17' rx='4.5' fill='%23A9C1FF'/%3E%3Crect x='18' y='29' width='9' height='28' rx='4.5' fill='%236B95FF'/%3E%3Cpath d='M31 11a4.5 4.5 0 0 1 4.5-4.5H40v46a4.5 4.5 0 0 1-9 0Z' fill='%23fff'/%3E%3Cpath d='M42 6.5h3a15 15 0 0 1 0 30h-3Z' fill='%232F6BFF'/%3E%3C/g%3E%3C/svg%3E">
+<script>
+  /* ================= AJUSTE AQUI =================
+     Depois de criar o projeto no Supabase, cole os dois valores abaixo
+     (Supabase > Project Settings > API). Vazio = modo demonstração.        */
+  window.PROVINTES = {
+    supabaseUrl: 'https://vdccqirrcamnimotrqqz.supabase.co',
+    supabaseAnonKey: 'sb_publishable_DiBFRaCxrtjOXbC9slpE7w_v1omYqCx'   // chave pública (pode ficar no site)
+  };
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700&family=Inter:wght@400;500;600;700&display=swap">
+<style>
+:root{--navy:#0B1F4D;--blue:#2F6BFF;--blue-2:#1846C8;--soft:#EEF3FF;--line:#ECEEF3;--bg:#F6F7F9;--ink:#0B1F4D;--muted:#6B7385;--ok:#0E7A4A;--ok-soft:#E3F6EC;--bad:#C8283C;--bad-soft:#FDECEE;--warn:#8A5300;--warn-soft:#FFF5E3}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;color:var(--ink);background:#fff;-webkit-font-smoothing:antialiased}
+button,input,textarea,select{font:inherit;color:inherit}
+button{cursor:pointer}
+[hidden]{display:none!important}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+h1,h2,h3{font-family:Sora,Inter,sans-serif;letter-spacing:-.02em;margin:0}
+svg.i{width:20px;height:20px;flex:none;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.sp{flex:1}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;height:36px;padding:0 14px;border-radius:10px;border:1px solid #DDE1E8;background:#fff;font-weight:600;font-size:14px;white-space:nowrap}
+.btn:hover{background:var(--bg)}
+.btn.pri{background:var(--blue);border-color:var(--blue);color:#fff}.btn.pri:hover{background:#2559E0}
+.btn:disabled{opacity:.5;cursor:default}
+.btn svg{width:17px;height:17px}
+.in{width:100%;height:42px;border:1px solid #DDE1E8;border-radius:10px;padding:0 12px;background:#fff;font-size:15px}
+textarea.in{height:auto;padding:10px 12px;resize:vertical;line-height:1.45}
+.in:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px rgba(47,107,255,.12)}
+.ico-s{flex:none;width:38px;height:38px;border-radius:10px;border:0;background:transparent;color:var(--muted);display:inline-flex;align-items:center;justify-content:center}
+.ico-s:hover,.ico-s[aria-expanded="true"]{background:var(--bg);color:var(--ink)}
+.ico-r{flex:none;width:42px;height:42px;border-radius:21px;border:0;background:var(--bg);color:var(--ink);display:flex;align-items:center;justify-content:center}
+.ico-r:hover{background:#ECEEF3}
+.ico-r.pri{background:var(--blue);color:#fff}
+.logo-mark{width:28px;height:28px;display:block;flex:none}
+.pill{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:600;padding:3px 9px;border-radius:7px;white-space:nowrap}
+.p-lead{background:var(--soft);color:var(--blue-2)}.p-cli{background:var(--ok-soft);color:var(--ok)}.p-gray{background:#F0F2F5;color:var(--muted)}
+.erro{background:var(--bad-soft);color:var(--bad);border-radius:10px;padding:10px 12px;font-size:14px}
+
+/* login */
+.login{min-height:100%;display:flex;align-items:center;justify-content:center;padding:24px;background:var(--bg)}
+.login form{width:min(400px,100%);background:#fff;border:1px solid var(--line);border-radius:20px;padding:32px;display:flex;flex-direction:column;gap:16px}
+.login .logo-mark{width:36px;height:36px}
+.wordmark{display:flex;align-items:center;gap:10px;font-family:Sora;font-weight:600;font-size:24px;letter-spacing:-.045em}
+.wordmark i{display:inline-block;width:.2em;height:.2em;border-radius:.05em;background:var(--blue);margin-left:.05em}
+.login label{display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600;color:var(--muted)}
+.demo-tag{font-size:12.5px;color:var(--muted);text-align:center;margin:0}
+
+/* casca */
+.app{display:flex;height:100%;height:100dvh;overflow:hidden}
+.main{flex:1;min-width:0;display:flex}
+
+/* lista */
+.lista{flex:0 0 340px;border-right:1px solid var(--line);display:flex;flex-direction:column;min-width:0;background:#fff}
+.lista-top{padding:14px 16px 0;display:flex;flex-direction:column;gap:12px}
+.lista-top .t{display:flex;align-items:center;gap:10px}
+.lista-top h1{font-size:19px}
+.off{font-size:12px;font-weight:600;color:var(--warn);background:var(--warn-soft);padding:4px 8px;border-radius:6px}
+.busca{display:flex;align-items:center;gap:8px;background:var(--bg);border-radius:10px;padding:0 12px;height:38px;color:var(--muted)}
+.busca svg{width:17px;height:17px}
+.busca input{border:0;background:transparent;outline:none;flex:1;font-size:14px;min-width:0;color:var(--ink)}
+.abas{display:flex;gap:20px;border-bottom:1px solid var(--line);margin:0 -16px;padding:0 16px}
+.abas button{border:0;background:none;padding:6px 0 10px;font-size:14px;font-weight:600;color:var(--muted);border-bottom:2px solid transparent;margin-bottom:-1px;display:inline-flex;align-items:center;gap:6px}
+.abas button:hover{color:var(--ink)}
+.abas button[aria-selected="true"]{color:var(--ink);border-color:var(--ink)}
+.abas .n{min-width:18px;height:18px;padding:0 5px;border-radius:9px;background:var(--blue);color:#fff;font-size:11px;line-height:18px;text-align:center}
+.itens{flex:1;overflow-y:auto;padding:6px 0}
+.item{position:relative;display:flex;gap:12px;align-items:center;padding:11px 16px;border:0;background:#fff;width:100%;text-align:left}
+.item:hover{background:#FAFBFC}
+.item[aria-current="true"]{background:var(--soft)}
+.item.need::before{content:'';position:absolute;left:0;top:12px;bottom:12px;width:3px;border-radius:0 3px 3px 0;background:var(--blue)}
+.av{flex:none;width:40px;height:40px;border-radius:20px;background:#EDEFF3;color:var(--navy);display:flex;align-items:center;justify-content:center;font-weight:600;font-size:14px}
+.item .c{flex:1;min-width:0;display:flex;flex-direction:column;gap:3px}
+.l1,.l2{display:flex;align-items:center;gap:8px;min-width:0}
+.item .n{flex:1;font-weight:600;font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.item .h{font-size:12px;color:var(--muted);flex:none}
+.item .m{flex:1;font-size:13.5px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.item .m.need{color:var(--blue-2);font-weight:600}
+.un{flex:none;min-width:20px;height:20px;padding:0 6px;border-radius:10px;background:var(--blue);color:#fff;font-size:11.5px;font-weight:700;display:flex;align-items:center;justify-content:center}
+.vazio{padding:40px 24px;text-align:center;color:var(--muted);font-size:14px;line-height:1.5}
+.demo-pe{display:flex;align-items:center;gap:8px;padding:10px 16px;border-top:1px solid var(--line);font-size:13px;color:var(--muted)}
+
+/* conversa */
+.chat{flex:1;min-width:0;display:flex;flex-direction:column;background:var(--bg)}
+.vazio-chat{margin:auto;display:flex;flex-direction:column;align-items:center;gap:12px;color:var(--muted);font-size:15px}
+.vazio-chat .logo-mark{width:44px;height:44px;opacity:.9}
+.chat-top{display:flex;align-items:center;gap:8px;padding:10px 16px;background:#fff;border-bottom:1px solid var(--line);min-height:64px}
+.who{display:flex;align-items:center;gap:10px;border:0;background:none;padding:4px 10px 4px 4px;border-radius:12px;min-width:0;text-align:left}
+.who:hover{background:var(--bg)}
+.who .av{width:38px;height:38px;font-size:13px}
+.wt{display:flex;flex-direction:column;min-width:0}
+.wt b{font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.st{font-size:12.5px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.st.need{color:var(--blue-2);font-weight:600}
+.chat-top .voltar{display:none}
+.msgs{flex:1;overflow-y:auto;padding:20px max(20px,calc((100% - 780px)/2));display:flex;flex-direction:column;gap:6px}
+.dia{align-self:center;font-size:12px;font-weight:600;color:var(--muted);margin:12px 0 6px}
+.b{max-width:min(75%,540px);display:flex;flex-direction:column}
+.b.ent{align-self:flex-start}.b.sai{align-self:flex-end}
+.bx{border-radius:14px;padding:8px 12px 6px;font-size:15px;line-height:1.45;white-space:pre-wrap;overflow-wrap:anywhere}
+.b.ent .bx{background:#fff;border:1px solid var(--line)}
+.b.anab .bx{background:var(--soft)}
+.b.eq .bx{background:var(--blue);color:#fff}
+.meta{display:flex;justify-content:flex-end;align-items:center;gap:4px;font-size:11px;color:var(--muted);margin-top:2px;white-space:nowrap}
+.b.eq .meta{color:#DCE6FF}
+.meta svg{width:14px;height:14px}
+.meta .lida{color:#7FD3FF}.b.anab .meta .lida{color:var(--blue)}
+.falhou{color:var(--bad);font-size:12px;font-weight:600}
+.b.eq .falhou{color:#FFD5DA}
+.sis{align-self:center;font-size:12.5px;color:var(--muted);text-align:center;max-width:80%;margin:8px 0;line-height:1.4}
+.foto{display:block;max-width:260px;max-height:300px;border-radius:8px;cursor:zoom-in;background:#E7ECF7;min-width:120px;min-height:80px}
+.doc{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:8px;background:rgba(11,31,77,.05);color:inherit;text-decoration:none;font-weight:600}
+.b.eq .doc{background:rgba(255,255,255,.16)}
+audio{width:240px;max-width:100%;height:36px;display:block}
+.trans{margin-top:6px;font-size:14px}
+.trans small{display:block;font-size:10.5px;font-weight:700;letter-spacing:.05em;color:var(--muted);margin-bottom:1px}
+.b.eq .trans small{color:#DCE6FF}
+.tpl{font-size:11px;font-weight:700;letter-spacing:.04em;opacity:.75;margin-bottom:2px}
+.comp{background:#fff;border-top:1px solid var(--line);padding:10px max(20px,calc((100% - 780px)/2)) calc(10px + env(safe-area-inset-bottom))}
+.linha{display:flex;align-items:flex-end;gap:6px}
+.linha .ico-s{height:42px}
+.txt{flex:1;width:100%;min-width:0;min-height:42px;max-height:160px;border:1px solid var(--line);border-radius:21px;padding:10px 16px;resize:none;font-size:15px;line-height:1.4;background:var(--bg)}
+.txt:focus{outline:none;border-color:#C9D3EA;background:#fff}
+.fechada{display:flex;align-items:center;gap:12px;font-size:14px;color:var(--muted)}
+.gravando{flex:1;display:flex;align-items:center;gap:10px;height:42px;padding:0 16px;border-radius:21px;background:var(--bad-soft);color:var(--bad);font-weight:600;font-size:14px}
+.gravando .dot{width:9px;height:9px;border-radius:5px;background:var(--bad);animation:pisca 1s infinite}
+@keyframes pisca{50%{opacity:.25}}
+.anexo{display:flex;align-items:center;gap:10px;padding:6px 6px 6px 10px;margin-bottom:8px;border-radius:12px;background:var(--bg);font-size:14px}
+.anexo img{width:40px;height:40px;object-fit:cover;border-radius:6px}
+
+/* ficha (gaveta) */
+.ficha{position:fixed;top:0;right:0;bottom:0;width:min(360px,100%);background:#fff;border-left:1px solid var(--line);box-shadow:-24px 0 48px -28px rgba(11,31,77,.3);z-index:35;overflow-y:auto;padding:14px 20px 24px;display:flex;flex-direction:column;gap:16px;transform:translateX(100%);visibility:hidden;transition:transform .2s ease,visibility 0s .2s}
+.ficha.aberta{transform:none;visibility:visible;transition:transform .2s ease}
+.f-top{display:flex;align-items:center}
+.f-top h2{font-size:16px}
+.ficha .topo{display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center}
+.ficha .topo .av{width:64px;height:64px;border-radius:32px;font-size:22px}
+.ficha .nome{border:0;text-align:center;font-weight:700;font-size:17px;width:100%;background:transparent;border-radius:8px;padding:4px}
+.ficha .nome:hover,.ficha .nome:focus{background:var(--bg);outline:none}
+.ficha .tel{color:var(--muted);font-size:14px}
+.campo{display:flex;flex-direction:column;gap:6px;font-size:13px;font-weight:600;color:var(--muted)}
+.salvo{font-size:12px;color:var(--ok);font-weight:600}
+.f-info{margin:0;font-size:13px;color:var(--muted)}
+
+/* menus */
+.pop{position:fixed;z-index:45;min-width:220px;max-width:min(380px,calc(100vw - 16px));max-height:60vh;overflow-y:auto;background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:0 16px 40px -12px rgba(11,31,77,.28);padding:6px}
+.pop button{display:flex;align-items:center;gap:10px;width:100%;border:0;background:none;padding:9px 10px;border-radius:8px;font-size:14px;text-align:left}
+.pop button:hover,.pop button:focus{background:var(--bg);outline:none}
+.pop button.perigo{color:var(--bad)}
+.pop svg{width:18px;height:18px;color:var(--muted)}
+.pop button.perigo svg{color:var(--bad)}
+.pop .rp{display:flex;flex-direction:column;gap:2px;min-width:0}
+.pop small{display:block;color:var(--muted);font-size:12.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:330px}
+
+/* configurações */
+.pag{flex:1;overflow-y:auto;padding:24px clamp(16px,4vw,48px) 48px;background:var(--bg)}
+.pag .w{max-width:760px;margin:0 auto;display:flex;flex-direction:column;gap:16px}
+.pag h1{font-size:24px}
+.link{align-self:flex-start;display:inline-flex;align-items:center;gap:4px;border:0;background:none;padding:6px 8px 6px 2px;margin-left:-2px;color:var(--muted);font-weight:600;font-size:14px;border-radius:8px}
+.link:hover{color:var(--ink)}
+.link svg{width:18px;height:18px}
+.card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px;display:flex;flex-direction:column;gap:14px}
+.card h2{font-size:16px}
+.card p{margin:0;color:var(--muted);font-size:14px;line-height:1.5}
+.sw{display:flex;align-items:center;gap:14px;cursor:pointer}
+.sw input{width:44px;height:26px;appearance:none;-webkit-appearance:none;border-radius:13px;background:#C9D0DC;position:relative;cursor:pointer;transition:background .15s;flex:none;margin:0}
+.sw input::after{content:'';position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:10px;background:#fff;transition:transform .15s}
+.sw input:checked{background:var(--blue)}.sw input:checked::after{transform:translateX(18px)}
+.sw b{display:block;font-size:15px}.sw small{display:block;color:var(--muted);font-size:13.5px;margin-top:2px}
+.rr{display:flex;align-items:flex-start;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}
+.rr:last-child{border-bottom:0}
+.rr p{margin:2px 0 0;font-size:13.5px}
+.rr select.in{height:36px;width:auto;font-size:14px}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+
+/* avisos e janelas */
+.toasts{position:fixed;right:16px;top:76px;display:flex;flex-direction:column;gap:8px;z-index:50}
+.toast{background:var(--navy);color:#fff;padding:12px 16px;border-radius:12px;font-size:14px;box-shadow:0 12px 30px -10px rgba(0,0,0,.4);max-width:360px}
+.toast.err{background:var(--bad)}
+.modal{position:fixed;inset:0;background:rgba(6,18,46,.45);display:flex;align-items:center;justify-content:center;padding:16px;z-index:40}
+.modal .card{width:min(500px,100%);max-height:90vh;overflow:auto}
+.lb{position:fixed;inset:0;background:rgba(0,0,0,.85);display:flex;align-items:center;justify-content:center;z-index:60;cursor:zoom-out}
+.lb img{max-width:94vw;max-height:94vh;border-radius:8px}
+
+/* celular */
+@media (max-width:860px){
+  .lista{flex:1;border-right:0}
+  .app.em-chat .lista{display:none}
+  .app:not(.em-chat) .chat{display:none}
+  .chat-top{padding:8px 8px;gap:4px}
+  .chat-top .voltar{display:inline-flex}
+  .msgs{padding:14px 12px}
+  .comp{padding:8px 10px calc(8px + env(safe-area-inset-bottom))}
+  .b{max-width:85%}
+  .grid2{grid-template-columns:1fr}
+}
+
+/* ===== cor e profundidade ===== */
+.login{background:radial-gradient(900px 600px at 70% 15%,#1A3A85,#0B1F4D 55%,#06122E)}
+.login form{border:0;box-shadow:0 40px 80px -30px rgba(0,0,0,.55)}
+.lista{background:linear-gradient(180deg,#0E2558,#0B1F4D 40%,#091A40);border-right:0;color:#fff}
+.lista-top h1{color:#fff}
+.lista .ico-s{color:#A9B7D6}.lista .ico-s:hover,.lista .ico-s[aria-expanded="true"]{background:rgba(255,255,255,.1);color:#fff}
+.lista .busca{background:rgba(255,255,255,.08);color:#9AA9CB}
+.lista .busca input{color:#fff}.lista .busca input::placeholder{color:#8C9BBD}
+.lista .abas{border-color:rgba(255,255,255,.1)}
+.lista .abas button{color:#8C9BBD}.lista .abas button:hover{color:#fff}
+.lista .abas button[aria-selected="true"]{color:#fff;border-color:#6B95FF}
+.lista .item{background:transparent;color:#fff;border-radius:12px;width:calc(100% - 16px);margin:1px 8px;padding:11px 10px}
+.lista .item:hover{background:rgba(255,255,255,.06)}
+.lista .item[aria-current="true"]{background:rgba(47,107,255,.28)}
+.lista .item.need::before{left:-8px;background:#6B95FF}
+.lista .item .h,.lista .item .m{color:#93A2C3}
+.lista .item .m.need{color:#9DBBFF}
+.lista .vazio{color:#93A2C3}
+.lista .demo-pe{border-color:rgba(255,255,255,.1);color:#8C9BBD}
+.lista .demo-pe .btn{background:rgba(255,255,255,.1);border-color:transparent;color:#fff}
+.lista .demo-pe .btn:hover{background:rgba(255,255,255,.16)}
+.lista .logo-mark>rect:first-child{fill:#17336F}
+.chat{background:radial-gradient(1200px 500px at 85% -10%,#DCE6FB,transparent 60%),linear-gradient(180deg,#EFF3FA,#E7ECF5)}
+.chat-top{border-bottom:0;box-shadow:0 1px 0 rgba(11,31,77,.06),0 8px 20px -14px rgba(11,31,77,.25);position:relative;z-index:1}
+.bx{box-shadow:0 1px 2px rgba(11,31,77,.08),0 6px 16px -10px rgba(11,31,77,.18)}
+.b.ent .bx{border:0;border-bottom-left-radius:5px}
+.b.sai .bx{border-bottom-right-radius:5px}
+.b.anab .bx{background:#DCE6FF}
+.b.eq .bx{background:linear-gradient(135deg,#3B78FF,#2253E0);box-shadow:0 8px 18px -10px rgba(34,83,224,.7)}
+.dia{background:rgba(255,255,255,.85);padding:4px 12px;border-radius:99px;box-shadow:0 1px 2px rgba(11,31,77,.06)}
+.sis{background:rgba(255,255,255,.7);padding:6px 14px;border-radius:12px;color:#4A5A7A}
+.comp{background:transparent;border-top:0;padding-top:6px;padding-bottom:calc(16px + env(safe-area-inset-bottom))}
+.comp .linha{background:#fff;border-radius:28px;padding:5px 5px 5px 8px;box-shadow:0 10px 30px -14px rgba(11,31,77,.35),0 1px 2px rgba(11,31,77,.06)}
+.comp .txt,.comp .txt:focus{background:transparent;border-color:transparent}
+.comp .anexo{background:#fff;box-shadow:0 6px 18px -12px rgba(11,31,77,.3)}
+.fechada{background:#fff;border-radius:16px;padding:10px 12px 10px 16px;box-shadow:0 10px 30px -14px rgba(11,31,77,.35)}
+.vazio-chat{color:#5B6A8A}
+.ficha{box-shadow:-30px 0 60px -30px rgba(11,31,77,.45);border-left:0}
+.btn.pri{box-shadow:0 6px 14px -8px rgba(47,107,255,.8)}
+.pag{background:linear-gradient(180deg,#EFF3FA,#E7ECF5)}
+.card{border:0;box-shadow:0 1px 2px rgba(11,31,77,.06),0 10px 30px -18px rgba(11,31,77,.3)}
+@media (max-width:860px){.comp{padding:4px 8px calc(10px + env(safe-area-inset-bottom))}.lista .item{width:calc(100% - 12px);margin:1px 6px}}
+
+.lista .sec{display:flex;align-items:center;gap:8px;padding:14px 18px 6px;font-size:11.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#7F8FB3}
+.lista .sec-n{min-width:20px;height:18px;padding:0 6px;border-radius:9px;background:rgba(255,255,255,.1);color:#C9D4EE;font-size:11px;display:inline-flex;align-items:center;justify-content:center;letter-spacing:0}
+.lista .sec-need{color:#9DBBFF}.lista .sec-need .sec-n{background:#2F6BFF;color:#fff}
+.l3{display:flex;gap:6px;margin-top:3px}
+.tg{font-size:11px;font-weight:600;padding:2px 7px;border-radius:6px;white-space:nowrap}
+.tg-novo{background:#2F6BFF;color:#fff}.tg-lead{background:rgba(107,149,255,.18);color:#AFC5FF}.tg-cli{background:rgba(52,199,123,.18);color:#7EE2AE}.tg-quem{background:rgba(255,255,255,.08);color:#C9D4EE}
+
+/* ===== conversa estilo WhatsApp ===== */
+.chat{background:#EFEAE2 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cg fill='none' stroke='%237A6A55' stroke-opacity='.06' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='12' y='10' width='16' height='21' rx='2'/%3E%3Cpath d='M16 17h8M16 22h6'/%3E%3Ccircle cx='82' cy='24' r='7'/%3E%3Cpath d='M82 20v4l3 2'/%3E%3Cpath d='M48 64l6-6 6 6M54 58v12'/%3E%3Crect x='86' y='72' width='18' height='13' rx='3'/%3E%3Cpath d='M86 77h18'/%3E%3Cpath d='M14 92a7 7 0 0 1 12-5 5 5 0 0 1 8 5z'/%3E%3Cpath d='M60 100l2 4 4 .6-3 3 .8 4-3.8-2-3.8 2 .8-4-3-3 4-.6z'/%3E%3Ccircle cx='40' cy='34' r='1.5'/%3E%3Ccircle cx='104' cy='50' r='1.5'/%3E%3Ccircle cx='30' cy='70' r='1.5'/%3E%3C/g%3E%3C/svg%3E") repeat}
+.chat-top{background:#F0F2F5;box-shadow:none;border-bottom:1px solid #E1E4E8;min-height:60px;padding:8px 16px}
+.who:hover{background:rgba(11,31,77,.05)}
+.who .av{width:40px;height:40px}
+.wt b{font-size:16px;font-weight:600;display:flex;align-items:center;gap:8px;font-family:Inter}
+.st{display:flex;align-items:center;gap:6px;font-size:13px;color:#667781}
+.st.need{color:var(--blue-2)}
+.pt{width:8px;height:8px;border-radius:4px;background:#AAB2BF;flex:none}
+.pt-anab{background:#25B868}.pt-precisa_voce{background:var(--blue);box-shadow:0 0 0 3px rgba(47,107,255,.2)}.pt-humano{background:#F0A020}
+.tgc{font-size:11px;font-weight:600;padding:2px 7px;border-radius:6px;font-family:Inter}
+.tgc-novo{background:var(--blue);color:#fff}.tgc-lead{background:var(--soft);color:var(--blue-2)}.tgc-cli{background:var(--ok-soft);color:var(--ok)}
+.pill-b{border-radius:999px;height:36px;padding:0 16px}
+.btn.pill-b:not(.pri){background:#fff;border-color:#D5DAE1}
+.msgs{padding:14px 7% 8px;gap:2px}
+.dia{background:#fff;color:#54656F;font-size:12.5px;font-weight:500;padding:5px 12px;border-radius:8px;box-shadow:0 1px .5px rgba(11,20,26,.13);margin:10px 0 8px}
+.sis{background:#FFF5C4;color:#54656F;font-size:12.5px;padding:5px 12px;border-radius:8px;box-shadow:0 1px .5px rgba(11,20,26,.13);margin:8px 0}
+.b{max-width:min(65%,560px)}
+.b.rabo{margin-top:8px}
+.bx{position:relative;border-radius:8px;padding:6px 8px 8px 9px;font-size:14.5px;line-height:1.38;box-shadow:0 1px .5px rgba(11,20,26,.13)}
+.b.ent .bx{background:#fff;border-radius:8px}
+.b.sai .bx{border-radius:8px}
+.b.anab .bx{background:#E8EEFC}
+.b.eq .bx{background:#D3E2FF;color:#111B21;box-shadow:0 1px .5px rgba(11,20,26,.13)}
+.b.ent.rabo .bx{border-top-left-radius:0}
+.b.sai.rabo .bx{border-top-right-radius:0}
+.b.rabo .bx::before{content:'';position:absolute;top:0;width:8px;height:13px}
+.b.ent.rabo .bx::before{left:-8px;background:#fff;clip-path:polygon(100% 0,0 0,100% 100%)}
+.b.anab.rabo .bx::before{right:-8px;background:#E8EEFC;clip-path:polygon(0 0,100% 0,0 100%)}
+.b.eq.rabo .bx::before{right:-8px;background:#D3E2FF;clip-path:polygon(0 0,100% 0,0 100%)}
+.autor{font-size:12.5px;font-weight:600;color:#5B3FC4;margin-bottom:2px}
+.b.eq .autor{color:var(--blue-2)}
+.meta{float:right;position:relative;top:7px;margin:-4px 0 0 10px;font-size:11px;color:#667781;display:inline-flex;align-items:center;gap:3px}
+.b.eq .meta{color:#5B6A85}
+.meta .lida,.b.anab .meta .lida,.b.eq .meta .lida{color:#53BDEB}
+.b.eq .trans small{color:#5B6A85}
+.b.eq .doc{background:rgba(11,31,77,.07)}
+.b.eq .falhou{color:var(--bad)}
+.foto{width:280px;max-width:100%;height:220px;max-height:220px;object-fit:cover;object-position:top;border-radius:6px;margin:-3px -5px 4px -6px;width:calc(100% + 11px);min-width:200px}
+.b:has(.foto) .bx{width:290px}
+audio{margin:2px 0}
+.trans{clear:both}
+.comp{background:#F0F2F5;border-top:1px solid #E1E4E8;padding:8px 16px calc(8px + env(safe-area-inset-bottom))}
+.comp .linha{background:transparent;box-shadow:none;border-radius:0;padding:0;gap:4px;align-items:center}
+.comp .txt,.comp .txt:focus{background:#fff;border:0;border-radius:10px;padding:11px 14px;min-height:42px}
+.comp .ico-s{color:#54656F}
+.comp .ico-r{background:transparent;color:#54656F}
+.comp .ico-r.pri{background:var(--blue);color:#fff}
+.comp .anexo{background:#fff;box-shadow:none}
+.fechada{background:transparent;box-shadow:none;padding:4px 0}
+@media (max-width:860px){.msgs{padding:10px 3% 6px}.b{max-width:85%}.chat-top .pill-b{padding:0 12px}.wt b .tgc{display:none}}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<div class="toasts" id="toasts" aria-live="polite"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+/* Converte áudio WebM/Opus (o que o Chrome grava) em Ogg/Opus (o que o WhatsApp aceita como mensagem de voz).
+   Não recodifica: só troca a "embalagem", então é instantâneo e não perde qualidade. */
+(function (root) {
+  const MASTER = new Set([0x18538067, 0x1F43B675, 0x1654AE6B, 0xAE, 0xA0]); // Segment, Cluster, Tracks, TrackEntry, BlockGroup
+  function vint(b, p, keepMarker) {
+    const first = b[p]; if (first === undefined) return null;
+    let len = 1, mask = 0x80; while (len <= 8 && !(first & mask)) { len++; mask >>= 1; }
+    if (len > 8) return null;
+    let v = keepMarker ? first : first & (mask - 1), unknown = (first & (mask - 1)) === mask - 1;
+    for (let i = 1; i < len; i++) { const x = b[p + i]; if (x === undefined) return null; v = v * 256 + x; if (x !== 0xFF) unknown = false; }
+    return { v, len, unknown };
+  }
+  function lerWebm(buf) {
+    const b = new Uint8Array(buf); let p = 0, codecPrivate = null; const pacotes = [];
+    while (p < b.length) {
+      const id = vint(b, p, true); if (!id) break; p += id.len;
+      const sz = vint(b, p, false); if (!sz) break; p += sz.len;
+      if (MASTER.has(id.v)) continue;                              // entra no contêiner (aceita tamanho desconhecido)
+      const fim = sz.unknown ? b.length : Math.min(b.length, p + sz.v);
+      if (id.v === 0x63A2) codecPrivate = b.slice(p, fim);
+      else if (id.v === 0xA3 || id.v === 0xA1) {                    // SimpleBlock / Block
+        const tr = vint(b, p, false); let q = p + tr.len + 2; const flags = b[q]; q += 1;
+        if (flags & 0x06) throw new Error('Áudio com "lacing": formato não suportado');
+        pacotes.push(b.slice(q, fim));
+      }
+      p = fim;
+    }
+    return { codecPrivate, pacotes };
+  }
+  function amostras(pkt) {
+    if (!pkt.length) return 0;
+    const toc = pkt[0], cfg = toc >> 3, c = toc & 3;
+    const ms = cfg < 12 ? [10, 20, 40, 60][cfg % 4] : cfg < 16 ? [10, 20][cfg % 2] : [2.5, 5, 10, 20][cfg % 4];
+    const n = c === 0 ? 1 : c < 3 ? 2 : (pkt[1] & 0x3F);
+    return Math.round(n * ms * 48);
+  }
+  const CRC = (() => { const t = new Uint32Array(256); for (let i = 0; i < 256; i++) { let r = i << 24; for (let j = 0; j < 8; j++) r = r & 0x80000000 ? ((r << 1) ^ 0x04C11DB7) >>> 0 : (r << 1) >>> 0; t[i] = r >>> 0; } return t; })();
+  function crc(b) { let c = 0; for (let i = 0; i < b.length; i++) c = ((c << 8) ^ CRC[((c >>> 24) ^ b[i]) & 0xFF]) >>> 0; return c >>> 0; }
+  function pagina(pkts, granule, serial, seq, flags) {
+    const lac = []; for (const k of pkts) { let n = k.length; while (n >= 255) { lac.push(255); n -= 255; } lac.push(n); }
+    const corpo = pkts.reduce((s, k) => s + k.length, 0);
+    const out = new Uint8Array(27 + lac.length + corpo), dv = new DataView(out.buffer);
+    out.set([0x4F, 0x67, 0x67, 0x53, 0, flags]);
+    dv.setUint32(6, granule % 0x100000000, true); dv.setUint32(10, Math.floor(granule / 0x100000000), true);
+    dv.setUint32(14, serial, true); dv.setUint32(18, seq, true); dv.setUint32(22, 0, true);
+    out[26] = lac.length; out.set(lac, 27);
+    let p = 27 + lac.length; for (const k of pkts) { out.set(k, p); p += k.length; }
+    dv.setUint32(22, crc(out), true);
+    return out;
+  }
+  function webmParaOgg(buf) {
+    const { codecPrivate, pacotes } = lerWebm(buf);
+    if (!pacotes.length) throw new Error('Gravação vazia');
+    let head = codecPrivate && codecPrivate.length >= 19 && String.fromCharCode(...codecPrivate.slice(0, 8)) === 'OpusHead' ? codecPrivate : null;
+    if (!head) { head = new Uint8Array(19); head.set([79, 112, 117, 115, 72, 101, 97, 100, 1, 1]); new DataView(head.buffer).setUint16(10, 312, true); new DataView(head.buffer).setUint32(12, 48000, true); }
+    const canais = head[9];
+    const vendor = new TextEncoder().encode('Provintes');
+    const tags = new Uint8Array(8 + 4 + vendor.length + 4); tags.set(new TextEncoder().encode('OpusTags')); new DataView(tags.buffer).setUint32(8, vendor.length, true); tags.set(vendor, 12);
+    const serial = (Math.random() * 0xFFFFFFFF) >>> 0, partes = [];
+    let seq = 0;
+    partes.push(pagina([head], 0, serial, seq++, 0x02));
+    partes.push(pagina([tags], 0, serial, seq++, 0));
+    let gran = 0, grupo = [], seg = 0, bytes = 0;
+    for (let i = 0; i < pacotes.length; i++) {
+      const k = pacotes[i], s = Math.floor(k.length / 255) + 1;
+      if (grupo.length && (seg + s > 255 || bytes + k.length > 4000)) { partes.push(pagina(grupo, gran, serial, seq++, 0)); grupo = []; seg = 0; bytes = 0; }
+      grupo.push(k); seg += s; bytes += k.length; gran += amostras(k);
+    }
+    partes.push(pagina(grupo, gran, serial, seq++, 0x04));
+    return { blob: new Blob(partes, { type: 'audio/ogg; codecs=opus' }), canais, segundos: gran / 48000 };
+  }
+  root.webmParaOgg = webmParaOgg;
+  if (typeof module !== 'undefined') module.exports = { webmParaOgg };
+})(typeof window !== 'undefined' ? window : globalThis);
+
+</script>
+<script>
+(() => {
+'use strict';
+const $ = (s, el = document) => el.querySelector(s);
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const CORES_AV = [['#FFE3D6','#B4471A'],['#DDF3E6','#14794A'],['#E6E0FF','#5B3FC4'],['#FFF0C7','#8A5A00'],['#D9F1F7','#0F6A80'],['#FDE0EC','#A8306A'],['#E2EAFF','#2448B8']];
+const avCor = k => { const s = String(k.nome || k.wa_id || ''); let n = 0; for (const ch of s) n = (n * 31 + ch.charCodeAt(0)) >>> 0; const [bg, fg] = CORES_AV[n % CORES_AV.length]; return `background:${bg};color:${fg}`; };
+const avTxt = k => k.nome ? ini(k.nome) : String(k.wa_id || '').slice(-2);
+const ini = n => String(n || '?').replace(/[^\p{L}\p{N} ]/gu, '').trim().split(/\s+/).slice(0, 2).map(p => p[0]).join('').toUpperCase() || '?';
+const fone = w => { const d = String(w || '').replace(/\D/g, ''); const m = d.match(/^55(\d{2})(\d{4,5})(\d{4})$/); return m ? `(${m[1]}) ${m[2].length === 5 ? m[2][0] + ' ' + m[2].slice(1) : m[2]}-${m[3]}` : (d ? '+' + d : ''); };
+const hora = iso => iso ? new Date(iso).toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }) : '';
+const diaDe = iso => { const d = new Date(iso), h = new Date(); const ontem = new Date(); ontem.setDate(h.getDate() - 1); if (d.toDateString() === h.toDateString()) return 'Hoje'; if (d.toDateString() === ontem.toDateString()) return 'Ontem'; return d.toLocaleDateString('pt-BR', { day: '2-digit', month: 'long' }); };
+const quando = iso => { if (!iso) return ''; const d = new Date(iso); return d.toDateString() === new Date().toDateString() ? hora(iso) : diaDe(iso) === 'Ontem' ? 'Ontem' : d.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit' }); };
+const janela = iso => iso ? 24 * 3600e3 - (Date.now() - new Date(iso).getTime()) : -1;
+const debounce = (fn, ms) => { let t; return (...a) => { clearTimeout(t); t = setTimeout(() => fn(...a), ms); }; };
+const ICON = {
+  chat: '<path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/>', cog: '<circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-2.9 1.2V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-2.9-1.2l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0-1.2-2.9H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.2-2.9l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 2.9-1.2V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 2.9 1.2l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0 1.2 2.9H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/>',
+  users: '<circle cx="9" cy="8" r="3.5"/><path d="M2.5 20a6.5 6.5 0 0 1 13 0"/><path d="M16 4.5a3.5 3.5 0 0 1 0 7M18.5 20a6.5 6.5 0 0 0-3-5.5"/>', out: '<path d="M15 4h4v16h-4M10 8l-4 4 4 4M6 12h11"/>',
+  search: '<circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/>', send: '<path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4z"/>', clip: '<path d="M21 11.5l-8.5 8.5a5 5 0 0 1-7-7L14 4.5a3.5 3.5 0 0 1 5 5L10.5 18a2 2 0 0 1-3-3L15 7.5"/>',
+  mic: '<rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/>', back: '<path d="M15 18l-6-6 6-6"/>', user: '<circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/>',
+  undo: '<path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/>', x: '<path d="M18 6L6 18M6 6l12 12"/>', check: '<path d="M5 12.5l4.5 4.5L19 7.5"/>', checks: '<path d="M2 12.5l4.5 4.5L16 7.5"/><path d="M11 16.5l.5.5L21 7.5"/>',
+  clock: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>', doc: '<path d="M6 3h9l4 4v14H6z"/><path d="M9 12h7M9 16h5"/>', trash: '<path d="M4 7h16M9 7V4h6v3M6 7l1 13h10l1-13"/>', info: '<circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/>',
+  spark: '<path d="M12 3l1.9 4.6L18.5 9l-4.6 1.9L12 15.5l-1.9-4.6L5.5 9l4.6-1.4z"/>', tpl: '<rect x="4" y="4" width="16" height="16" rx="3"/><path d="M8 9h8M8 13h8M8 17h5"/>', stop: '<rect x="6" y="6" width="12" height="12" rx="2"/>'
+};
+const ic = n => `<svg class="i" viewBox="0 0 24 24" aria-hidden="true">${ICON[n] || ''}</svg>`;
+const MARK = '<svg class="logo-mark" viewBox="0 0 48 48" role="img" aria-label="Provintes"><rect width="48" height="48" rx="13" fill="#0B1F4D"/><g transform="translate(6.2 6.6) scale(.56)"><rect x="5" y="40" width="9" height="17" rx="4.5" fill="#A9C1FF"/><rect x="18" y="29" width="9" height="28" rx="4.5" fill="#6B95FF"/><path d="M31 11a4.5 4.5 0 0 1 4.5-4.5H40v46a4.5 4.5 0 0 1-9 0Z" fill="#fff"/><path d="M42 6.5h3a15 15 0 0 1 0 30h-3Z" fill="#2F6BFF"/></g></svg>';
+function toast(msg, err) { const t = document.createElement('div'); t.className = 'toast' + (err ? ' err' : ''); t.innerHTML = msg; $('#toasts').appendChild(t); setTimeout(() => t.remove(), err ? 7000 : 3800); }
+function bip() { try { const a = new (window.AudioContext || window.webkitAudioContext)(); [880, 1320].forEach((f, i) => { const o = a.createOscillator(), g = a.createGain(); o.frequency.value = f; g.gain.setValueAtTime(.0001, a.currentTime + i * .14); g.gain.exponentialRampToValueAtTime(.18, a.currentTime + i * .14 + .02); g.gain.exponentialRampToValueAtTime(.0001, a.currentTime + i * .14 + .3); o.connect(g).connect(a.destination); o.start(a.currentTime + i * .14); o.stop(a.currentTime + i * .14 + .32); }); } catch { } }
+
+
+const CFG = window.PROVINTES || {};
+const DEMO = !CFG.supabaseUrl || !CFG.supabaseAnonKey || /[?&]demo\b/.test(location.search);
+
+function apiSupabase() {
+  const sb = window.supabase.createClient(CFG.supabaseUrl, CFG.supabaseAnonKey);
+  const ok = r => { if (r.error) throw new Error(r.error.message); return r.data; };
+  const fn = async (nome, body) => {
+    const { data, error } = await sb.functions.invoke(nome, { body });
+    if (error) { let msg = error.message; try { const j = await error.context.json(); msg = j.erro || msg; } catch { } throw new Error(msg); }
+    if (data && data.erro) throw new Error(data.erro);
+    return data;
+  };
+  const urlCache = {};
+  return {
+    demo: false,
+    async sessao() { const { data } = await sb.auth.getSession(); return data.session; },
+    async entrar(email, senha) { ok(await sb.auth.signInWithPassword({ email, password: senha })); },
+    async sair() { await sb.auth.signOut(); },
+    async trocarSenha(nova) { ok(await sb.auth.updateUser({ password: nova })); },
+    async eu() { const { data: { user } } = await sb.auth.getUser(); if (!user) return null; return ok(await sb.from('equipe').select('*').eq('user_id', user.id).maybeSingle()); },
+    async conversas() { return ok(await sb.from('conversas').select('*, contato:contatos(*)').order('ultima_msg_em', { ascending: false, nullsFirst: false }).limit(500)); },
+    async conversa(id) { return ok(await sb.from('conversas').select('*, contato:contatos(*)').eq('id', id).maybeSingle()); },
+    async mensagens(cid) { return ok(await sb.from('mensagens').select('*').eq('conversa_id', cid).order('criado_em', { ascending: true }).limit(1000)); },
+    async urlMidia(path) { if (urlCache[path]) return urlCache[path]; const d = ok(await sb.storage.from('midias').createSignedUrl(path, 3600)); return (urlCache[path] = d.signedUrl); },
+    atualizarConversa: async (id, c) => ok(await sb.from('conversas').update(c).eq('id', id)),
+    atualizarContato: async (id, c) => ok(await sb.from('contatos').update(c).eq('id', id)),
+    enviarTexto: (cid, texto) => fn('enviar', { acao: 'texto', conversa_id: cid, texto }),
+    async enviarMidia(cid, blob, { nome, mime, legenda, transcricao }) {
+      const path = `${cid}/saida/${Date.now()}-${(nome || 'arquivo').replace(/[^\w.-]+/g, '_')}`;
+      ok(await sb.storage.from('midias').upload(path, blob, { contentType: mime }));
+      return fn('enviar', { acao: 'midia', conversa_id: cid, midia_path: path, midia_mime: mime, midia_nome: nome, legenda, transcricao });
+    },
+    modelos: async () => (await fn('enviar', { acao: 'modelos' })).modelos,
+    enviarModelo: (cid, m, parametros, previa) => fn('enviar', { acao: 'modelo', conversa_id: cid, nome: m.name, idioma: m.language, parametros, texto_previa: previa }),
+    respostas: async () => ok(await sb.from('respostas_prontas').select('*').order('ordem')),
+    salvarResposta: async r => r.id ? ok(await sb.from('respostas_prontas').update({ titulo: r.titulo, texto: r.texto }).eq('id', r.id)) : ok(await sb.from('respostas_prontas').insert({ titulo: r.titulo, texto: r.texto, ordem: r.ordem || 99 })),
+    apagarResposta: async id => ok(await sb.from('respostas_prontas').delete().eq('id', id)),
+    config: async () => ok(await sb.from('config').select('*').eq('id', 1).single()),
+    salvarConfig: async c => ok(await sb.from('config').update({ ...c, atualizado_em: new Date().toISOString() }).eq('id', 1)),
+    equipe: async () => ok(await sb.from('equipe').select('*').order('criado_em')),
+    convidar: (nome, email, papel) => fn('equipe', { acao: 'convidar', nome, email, papel }),
+    mudarPapel: (user_id, papel) => fn('equipe', { acao: 'papel', user_id, papel }),
+    mudarAtivo: (user_id, ativo) => fn('equipe', { acao: 'ativo', user_id, ativo }),
+    assinar(cb) {
+      sb.channel('painel')
+        .on('postgres_changes', { event: '*', schema: 'public', table: 'conversas' }, p => cb('conversa', p.new && p.new.id ? p.new : p.old))
+        .on('postgres_changes', { event: '*', schema: 'public', table: 'mensagens' }, p => cb('mensagem', p.new))
+        .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'contatos' }, p => cb('contato', p.new))
+        .subscribe();
+    }
+  };
+}
+
+function apiDemo() {
+  const agora = Date.now(), min = 60e3, uid = () => Math.random().toString(36).slice(2, 10);
+  const EU = { user_id: 'u1', nome: 'Bia', email: 'bia@provintes.com.br', papel: 'admin', ativo: true };
+  const db = {
+    equipe: [EU, { user_id: 'u2', nome: 'Abner', email: 'abner@provintes.com.br', papel: 'admin', ativo: true }],
+    contatos: [
+      { id: 'k1', wa_id: '5577981110001', nome: 'Maria Souza', tipo: 'lead', origem: 'Instagram', empresas: '3 lojas', anotacoes: '', criado_em: new Date(agora - 25 * min).toISOString() },
+      { id: 'k2', wa_id: '5577981110002', nome: 'João Pedro', tipo: 'lead', origem: 'Site', empresas: '', anotacoes: '', criado_em: new Date(agora - 30 * 3600e3).toISOString() },
+      { id: 'k3', wa_id: '5577981110003', nome: null, tipo: 'lead', origem: '', empresas: '', anotacoes: '', criado_em: new Date(agora - 40 * min).toISOString() },
+      { id: 'k4', wa_id: '5571981110004', nome: 'Construtora Alfa', tipo: 'cliente', origem: 'Indicação', empresas: 'Construtora', anotacoes: 'Cliente desde outubro, plano Pro.', criado_em: new Date(agora - 3 * 864e5).toISOString() },
+      { id: 'k5', wa_id: '5577981110005', nome: 'Ana Lima', tipo: 'lead', origem: 'Instagram', empresas: '', anotacoes: 'Vai falar com o sócio.', criado_em: new Date(agora - 30 * 3600e3).toISOString() }
+    ],
+    conversas: [], mensagens: [], respostas: [
+      { id: 'r1', titulo: 'Tabela de planos', texto: 'Os planos da Provintes (por mês): Básico R$ 119,90 no anual (R$ 187,90 no mensal), Pro R$ 229,90 no anual (R$ 319,90 no mensal) e Plus R$ 429,90 no anual (R$ 597,90 no mensal). Todos com WhatsApp e IA, e você testa grátis por 7 dias.', ordem: 1 },
+      { id: 'r2', titulo: 'Teste grátis', texto: 'Você pode testar a Provintes grátis por 7 dias, sem cartão. Quer que eu crie o seu acesso?', ordem: 2 },
+      { id: 'r3', titulo: 'Agendar demonstração', texto: 'Posso te mostrar a Provintes funcionando em 15 minutos, por vídeo. Qual o melhor dia e horário pra você?', ordem: 3 }
+    ],
+    config: { anab_ativa: true, anab_conhecimento: 'PROVINTES · gestão de despesas para empresas.\nPlanos: Básico R$ 119,90/mês no anual, Pro R$ 229,90, Plus R$ 429,90. Teste grátis por 7 dias.', alerta_numero: '' }
+  };
+  const conv = (id, k, status, extra = {}) => db.conversas.push({ id, contato_id: k, status, motivo: null, atendente_id: null, nao_lidas: 0, ultima_msg_em: null, ultima_msg_texto: '', ultima_entrada_em: null, criado_em: new Date().toISOString(), ...extra });
+  conv('c1', 'k1', 'precisa_voce', { motivo: 'quer o plano Plus para 3 lojas', nao_lidas: 2 });
+  conv('c2', 'k2', 'anab'); conv('c3', 'k3', 'anab', { nao_lidas: 1 }); conv('c4', 'k4', 'humano', { atendente_id: 'u2' }); conv('c5', 'k5', 'encerrada');
+  const msg = (c, dir, autor, texto, minAtras, extra = {}) => { const m = { id: uid(), conversa_id: c, direcao: dir, autor, autor_id: autor === 'equipe' ? (extra.autor_id || 'u1') : null, tipo: 'texto', texto, transcricao: null, midia_path: null, midia_mime: null, midia_nome: null, wa_message_id: 'w' + uid(), status: dir === 'entrada' ? 'recebida' : 'lida', erro: null, criado_em: new Date(agora - minAtras * min).toISOString(), ...extra }; db.mensagens.push(m); return m; };
+  msg('c1', 'entrada', 'contato', 'Oi! Vi a Provintes no Instagram. Como funciona e quanto custa?', 25);
+  msg('c1', 'saida', 'anab', 'Oi, Maria! 😊 É simples: você tira foto da nota, boleto ou Pix e manda aqui no WhatsApp. A Provintes lança tudo sozinha e te avisa antes de vencer. Os planos começam em R$ 119,90 por mês, e dá pra testar grátis por 7 dias. Quer conhecer os planos?', 25);
+  msg('c1', 'entrada', 'contato', null, 12, { tipo: 'audio', transcricao: 'Tenho três lojas de roupa aqui em Vitória da Conquista. Queria falar com alguém sobre o plano Plus.', midia_path: 'demo/audio.ogg', midia_mime: 'audio/ogg' });
+  msg('c1', 'saida', 'anab', 'Que legal, Maria! Já chamei a equipe da Provintes. Alguém continua com você aqui mesmo, em instantes.', 12);
+  msg('c1', 'sistema', 'sistema', 'A.N.A.B passou a conversa para a equipe · quer o plano Plus para 3 lojas', 12);
+  msg('c2', 'entrada', 'contato', 'Boa tarde. Funciona pra MEI?', 180); msg('c2', 'saida', 'anab', 'Boa tarde, João! Funciona sim: a Provintes serve para empresa de qualquer tamanho, inclusive MEI. O plano Básico costuma ser suficiente. Quer testar grátis por 7 dias?', 180);
+  msg('c2', 'entrada', 'contato', 'Obrigado! Vou testar os 7 dias.', 175); msg('c2', 'saida', 'anab', 'Combinado! Me diz o seu nome completo e o nome da empresa que eu já peço o seu acesso. 🙂', 175);
+  msg('c3', 'entrada', 'contato', 'Funciona pelo celular também?', 40); msg('c3', 'saida', 'anab', 'Funciona sim! Pelo navegador do celular ou instalando como app, sem precisar de loja. E pelo WhatsApp você já manda as notas. Quer testar?', 40);
+  msg('c3', 'entrada', 'contato', null, 6, { tipo: 'imagem', texto: 'É esse tipo de nota que eu tenho', midia_path: 'demo/nota.svg', midia_mime: 'image/svg+xml' });
+  msg('c4', 'entrada', 'contato', 'O relatório do mês saiu com uma categoria errada, podem ver?', 3000); msg('c4', 'saida', 'equipe', 'Claro! Já corrigi a categoria e reenviei o relatório no seu e-mail.', 2990, { autor_id: 'u2' });
+  msg('c5', 'entrada', 'contato', 'Vou ver com meu sócio e te falo.', 1800);
+  for (const c of db.conversas) { const ms = db.mensagens.filter(m => m.conversa_id === c.id); const u = ms[ms.length - 1], e = ms.filter(m => m.direcao === 'entrada').pop(); c.ultima_msg_em = u.criado_em; c.ultima_msg_texto = prev(u); c.ultima_entrada_em = e ? e.criado_em : null; }
+  function prev(m) { if (m.tipo === 'audio') return '🎤 Áudio' + (m.transcricao ? ' · ' + m.transcricao : ''); if (m.tipo === 'imagem') return '📷 Foto' + (m.texto ? ' · ' + m.texto : ''); if (m.tipo === 'documento') return '📄 ' + (m.midia_nome || 'Arquivo'); return (m.autor === 'anab' ? 'A.N.A.B: ' : m.autor === 'equipe' ? (db.equipe.find(e => e.user_id === m.autor_id) || EU).nome + ': ' : '') + (m.texto || ''); }
+  const visivel = c => { const k = db.contatos.find(x => x.id === c.contato_id); return k.tipo === 'lead' || ['precisa_voce', 'humano'].includes(c.status); };
+  const comContato = c => ({ ...c, contato: { ...db.contatos.find(k => k.id === c.contato_id) } });
+  const ouvintes = []; const emit = (t, o) => setTimeout(() => ouvintes.forEach(f => f(t, o)), 60);
+  const blobs = {};
+  const NOTA_SVG = 'data:image/svg+xml;utf8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" width="420" height="560"><rect width="420" height="560" fill="#fff"/><text x="30" y="60" font-family="Arial" font-size="22" font-weight="700" fill="#0B1F4D">MERCADO BOM PREÇO</text><text x="30" y="92" font-family="Arial" font-size="14" fill="#5B6478">CNPJ 12.345.678/0001-90 · NFC-e 4471</text><g font-family="Arial" font-size="16" fill="#33405E"><text x="30" y="150">Café 500 g</text><text x="330" y="150">18,90</text><text x="30" y="185">Papel A4 (5 pct)</text><text x="330" y="185">129,50</text><text x="30" y="220">Água 20 L (2)</text><text x="330" y="220">24,00</text></g><line x1="30" y1="250" x2="390" y2="250" stroke="#0B1F4D" stroke-width="2"/><text x="30" y="285" font-family="Arial" font-size="20" font-weight="700" fill="#0B1F4D">TOTAL</text><text x="300" y="285" font-family="Arial" font-size="20" font-weight="700" fill="#0B1F4D">172,40</text></svg>');
+  function audioDemo() { const sr = 8000, n = sr * 3, b = new ArrayBuffer(44 + n * 2), v = new DataView(b); const w = (o, s) => [...s].forEach((c, i) => v.setUint8(o + i, c.charCodeAt(0))); w(0, 'RIFF'); v.setUint32(4, 36 + n * 2, true); w(8, 'WAVEfmt '); v.setUint32(16, 16, true); v.setUint16(20, 1, true); v.setUint16(22, 1, true); v.setUint32(24, sr, true); v.setUint32(28, sr * 2, true); v.setUint16(32, 2, true); v.setUint16(34, 16, true); w(36, 'data'); v.setUint32(40, n * 2, true); for (let i = 0; i < n; i++) v.setInt16(44 + i * 2, Math.sin(i / sr * 2 * Math.PI * (220 + 60 * Math.sin(i / sr * 3))) * 6000 * Math.min(1, (n - i) / 2000), true); return URL.createObjectURL(new Blob([b], { type: 'audio/wav' })); }
+  let audioUrl;
+  const enviar = async (cid, m) => {
+    const c = db.conversas.find(x => x.id === cid);
+    if (m.tipo !== 'template' && janela(c.ultima_entrada_em) <= 0) throw new Error('Já passaram 24 horas da última mensagem dessa pessoa. Pelas regras do WhatsApp, agora só dá para mandar uma mensagem-modelo aprovada.');
+    const nova = { id: uid(), conversa_id: cid, direcao: 'saida', autor: 'equipe', autor_id: EU.user_id, tipo: 'texto', texto: null, transcricao: null, midia_path: null, midia_mime: null, midia_nome: null, wa_message_id: 'w' + uid(), status: 'enviada', erro: null, criado_em: new Date().toISOString(), ...m };
+    db.mensagens.push(nova); emit('mensagem', nova);
+    Object.assign(c, { ultima_msg_em: nova.criado_em, ultima_msg_texto: prev(nova), nao_lidas: 0 });
+    if (c.status !== 'humano') Object.assign(c, { status: 'humano', atendente_id: EU.user_id });
+    emit('conversa', c);
+    setTimeout(() => { nova.status = 'entregue'; emit('mensagem', nova); }, 900); setTimeout(() => { nova.status = 'lida'; emit('mensagem', nova); }, 2600);
+    return { mensagem: nova };
+  };
+  const api = {
+    demo: true,
+    async sessao() { try { return sessionStorage.getItem('demo-sessao') ? {} : null; } catch { return window.__demoS ? {} : null; } },
+    async entrar(email, senha) { if (!email || !senha) throw new Error('Informe e-mail e senha.'); window.__demoS = 1; try { sessionStorage.setItem('demo-sessao', '1'); } catch { } },
+    async sair() { window.__demoS = 0; try { sessionStorage.removeItem('demo-sessao'); } catch { } },
+    async trocarSenha() { },
+    async eu() { return EU; },
+    async conversas() { return db.conversas.filter(visivel).map(comContato).sort((a, b) => (b.ultima_msg_em || '').localeCompare(a.ultima_msg_em || '')); },
+    async conversa(id) { const c = db.conversas.find(x => x.id === id); return c && visivel(c) ? comContato(c) : null; },
+    async mensagens(cid) { return db.mensagens.filter(m => m.conversa_id === cid).sort((a, b) => a.criado_em.localeCompare(b.criado_em)); },
+    async urlMidia(p) { if (blobs[p]) return blobs[p]; if (p === 'demo/nota.svg') return NOTA_SVG; if (/audio/.test(p)) return audioUrl || (audioUrl = audioDemo()); return ''; },
+    async atualizarConversa(id, campos) { const c = db.conversas.find(x => x.id === id); Object.assign(c, campos); emit('conversa', c); },
+    async atualizarContato(id, campos) { const k = db.contatos.find(x => x.id === id); Object.assign(k, campos); emit('contato', k); },
+    enviarTexto: (cid, texto) => enviar(cid, { texto }),
+    async enviarMidia(cid, blob, { nome, mime, legenda, transcricao }) { const p = `${cid}/saida/${uid()}`; blobs[p] = URL.createObjectURL(blob); return enviar(cid, { tipo: mime.startsWith('image/') ? 'imagem' : mime.startsWith('audio/') ? 'audio' : mime.startsWith('video/') ? 'video' : 'documento', midia_path: p, midia_mime: mime, midia_nome: nome, texto: legenda || null, transcricao: transcricao || null }); },
+    async modelos() { return [{ name: 'retomar_conversa', language: 'pt_BR', texto: 'Oi, {{1}}! Aqui é da Provintes. Ainda posso te ajudar com a organização das notas da sua empresa?', params: 1 }, { name: 'acesso_teste', language: 'pt_BR', texto: 'Oi, {{1}}! Seu acesso de teste da Provintes está pronto. Entre por {{2}} e use seu e-mail.', params: 2 }]; },
+    enviarModelo: (cid, m, params, previa) => enviar(cid, { tipo: 'template', texto: previa }),
+    async respostas() { return db.respostas.slice().sort((a, b) => a.ordem - b.ordem); },
+    async salvarResposta(r) { if (r.id) Object.assign(db.respostas.find(x => x.id === r.id), r); else db.respostas.push({ ...r, id: uid(), ordem: 99 }); },
+    async apagarResposta(id) { db.respostas = db.respostas.filter(r => r.id !== id); },
+    async config() { return { ...db.config }; },
+    async salvarConfig(c) { Object.assign(db.config, c); },
+    async equipe() { return db.equipe.slice(); },
+    async convidar(nome, email, papel) { db.equipe.push({ user_id: uid(), nome, email, papel, ativo: true }); return { senha: 'Ex3mpl0Senha' }; },
+    async mudarPapel(id, papel) { db.equipe.find(e => e.user_id === id).papel = papel; },
+    async mudarAtivo(id, ativo) { db.equipe.find(e => e.user_id === id).ativo = ativo; },
+    assinar(cb) { ouvintes.push(cb); },
+    /* simulação: um contato manda mensagem */
+    simular(tipo) {
+      const falas = { lead: ['Oi! Quanto custa a Provintes?', 'Vocês emitem nota?', 'Tem desconto pra pagar o ano todo?'], humano: ['Quero falar com um atendente, por favor'], audio: ['(áudio)'] };
+      let k = db.contatos.find(x => x.id === 'kx'), c = db.conversas.find(x => x.id === 'cx');
+      if (!k) { k = { id: 'kx', wa_id: '5577981119999', nome: 'Carla Mendes', tipo: 'lead', origem: '', empresas: '', anotacoes: '', criado_em: new Date().toISOString() }; db.contatos.push(k); conv('cx', 'kx', 'anab'); c = db.conversas.find(x => x.id === 'cx'); }
+      const m = tipo === 'audio' ? msg('cx', 'entrada', 'contato', null, 0, { tipo: 'audio', transcricao: 'Oi, eu tenho uma clínica e queria saber se dá pra separar os gastos por médico.', midia_path: 'demo/audio2.ogg' })
+        : msg('cx', 'entrada', 'contato', falas[tipo][Math.floor(Math.random() * falas[tipo].length)], 0);
+      Object.assign(c, { ultima_msg_em: m.criado_em, ultima_msg_texto: prev(m), ultima_entrada_em: m.criado_em, nao_lidas: c.nao_lidas + 1 });
+      if (c.status === 'encerrada') c.status = 'anab';
+      emit('mensagem', m); emit('conversa', c);
+      if (c.status !== 'anab' || !db.config.anab_ativa) return;
+      setTimeout(() => {
+        const chama = tipo === 'humano' || /desconto|emitem/.test(m.texto || '');
+        const r = tipo === 'audio' ? 'Dá sim! Na Provintes você cria um departamento para cada médico e cada nota fica no lugar certo. Quer testar grátis por 7 dias?' : chama ? 'Claro! Já chamei a equipe da Provintes. Alguém continua com você aqui mesmo, em instantes. 🙂' : 'Oi, Carla! Os planos começam em R$ 119,90 por mês, e você testa grátis por 7 dias. Quer que eu te explique como funciona?';
+        const a = msg('cx', 'saida', 'anab', r, 0); a.status = 'enviada'; Object.assign(c, { ultima_msg_em: a.criado_em, ultima_msg_texto: prev(a) }); emit('mensagem', a);
+        if (chama) { Object.assign(c, { status: 'precisa_voce', motivo: tipo === 'humano' ? 'pediu para falar com um atendente' : 'pergunta que a A.N.A.B não sabe responder' }); const s = msg('cx', 'sistema', 'sistema', 'A.N.A.B passou a conversa para a equipe · ' + c.motivo, 0); emit('mensagem', s); }
+        emit('conversa', c);
+      }, 1600);
+    }
+  };
+  return api;
+}
+const API = DEMO ? apiDemo() : apiSupabase();
+
+Object.assign(ICON, {
+  dots: '<circle cx="5" cy="12" r="1.2"/><circle cx="12" cy="12" r="1.2"/><circle cx="19" cy="12" r="1.2"/>',
+  zap: '<path d="M13 2L4 14h7l-1 8 9-12h-7z"/>'
+});
+
+/* =====================================================================
+   estado
+   ===================================================================== */
+const S = { eu: null, convs: new Map(), msgs: new Map(), sel: null, filtro: 'todas', busca: '', view: 'conversas', respostas: [], config: null, equipe: [], fichaAberta: false, anexo: null, rec: null, carregando: new Set(), menu: null, menuDe: null };
+const root = $('#root');
+const isAdmin = () => S.eu && S.eu.papel === 'admin';
+const nomeEquipe = id => (S.equipe.find(e => e.user_id === id) || {}).nome || 'Equipe';
+const nomeC = c => c.contato.nome || fone(c.contato.wa_id);
+const primeiroNome = c => nomeC(c).split(' ')[0];
+const paraVoce = c => c.status === 'precisa_voce' || (c.status === 'humano' && c.atendente_id === S.eu.user_id);
+const contaPrecisa = () => [...S.convs.values()].filter(c => c.status === 'precisa_voce').length;
+function titulo() { const n = contaPrecisa(); document.title = (n ? `(${n}) ` : '') + 'Provintes · Conversas'; }
+
+function telaLogin(erro) {
+  root.innerHTML = `<main class="login"><form id="fLogin" novalidate>
+    <div class="wordmark">${MARK}<span>provintes<i></i></span></div>
+    <div><h1 style="font-size:22px">Entrar no painel</h1><p style="margin:6px 0 0;color:var(--muted);font-size:14px">Conversas do WhatsApp da Provintes.</p></div>
+    ${erro ? `<div class="erro" role="alert">${esc(erro)}</div>` : ''}
+    <label>E-mail<input class="in" type="email" id="lEmail" autocomplete="username" required ${DEMO ? 'value="bia@provintes.com.br"' : ''}></label>
+    <label>Senha<input class="in" type="password" id="lSenha" autocomplete="current-password" required ${DEMO ? 'value="demonstracao"' : ''}></label>
+    <button class="btn pri" type="submit" style="height:48px">Entrar</button>
+    ${DEMO ? '<p class="demo-tag">Modo demonstração: os dados são de exemplo e ficam só neste navegador.</p>' : ''}
+  </form></main>`;
+  const entrar = async e => {
+    e.preventDefault(); const b = $('#fLogin button'); if (b.disabled) return; b.disabled = true; b.textContent = 'Entrando…';
+    try { await API.entrar($('#lEmail').value.trim(), $('#lSenha').value); await iniciar(); }
+    catch (x) { telaLogin(/invalid/i.test(x.message) ? 'E-mail ou senha incorretos.' : x.message); }
+  };
+  /* o clique funciona mesmo em visualizadores que bloqueiam o envio de formulários */
+  $('#fLogin button').addEventListener('click', entrar);
+  $('#fLogin').addEventListener('submit', entrar);
+  $('#fLogin').addEventListener('keydown', e => { if (e.key === 'Enter') entrar(e); });
+}
+
+
+
+/* =====================================================================
+   casca
+   ===================================================================== */
+function casca() { root.innerHTML = '<div class="app" id="app"><div class="main" id="main"></div></div>'; }
+function render() {
+  fecharMenu();
+  const main = $('#main');
+  if (S.view === 'conversas') {
+    main.innerHTML = '<section class="lista" id="lista" aria-label="Conversas"></section><section class="chat" id="chat" aria-label="Conversa aberta"></section><aside class="ficha" id="ficha" aria-label="Ficha do contato"></aside>';
+    renderLista(); renderChat(); renderFicha();
+    if (S.sel) renderMsgs(true);
+  } else {
+    main.innerHTML = `<div class="pag"><div class="w"><button type="button" class="link" data-view="conversas">${ic('back')}Conversas</button><div id="pagC" style="display:flex;flex-direction:column;gap:16px"></div></div></div>`;
+    const c = $('#pagC');
+    (S.view === 'anab' ? telaAnab : S.view === 'equipe' ? telaEquipe : telaConta)(c);
+  }
+  $('#app').classList.toggle('em-chat', S.view === 'conversas' && !!S.sel);
+  titulo();
+}
+
+/* =====================================================================
+   menus (⋯)
+   ===================================================================== */
+function abrirMenu(btn, itens, nome) {
+  fecharMenu();
+  if (!itens.length) return;
+  const m = document.createElement('div'); m.className = 'pop'; m.setAttribute('role', 'menu');
+  m.innerHTML = itens.map((it, i) => `<button type="button" role="menuitem" data-i="${i}" class="${it.perigo ? 'perigo' : ''}">${it.icone ? ic(it.icone) : ''}${it.html || `<span>${esc(it.t)}</span>`}</button>`).join('');
+  document.body.appendChild(m);
+  const r = btn.getBoundingClientRect(), mw = m.offsetWidth, mh = m.offsetHeight;
+  let left = r.right - mw; if (left < 8) left = Math.min(r.left, innerWidth - mw - 8);
+  let top = r.bottom + 6; if (top + mh > innerHeight - 8) top = r.top - mh - 6;
+  m.style.left = Math.max(8, left) + 'px'; m.style.top = Math.max(8, top) + 'px';
+  m.addEventListener('click', e => { const b = e.target.closest('[data-i]'); if (!b) return; fecharMenu(); itens[+b.dataset.i].f(); });
+  m.addEventListener('keydown', e => {
+    const bs = [...m.querySelectorAll('button')], i = bs.indexOf(document.activeElement);
+    if (e.key === 'ArrowDown') { e.preventDefault(); bs[(i + 1) % bs.length].focus(); }
+    if (e.key === 'ArrowUp') { e.preventDefault(); bs[(i - 1 + bs.length) % bs.length].focus(); }
+  });
+  btn.setAttribute('aria-expanded', 'true');
+  S.menu = m; S.menuDe = nome; S.menuBtn = btn;
+  m.querySelector('button').focus({ preventScroll: true });
+}
+function fecharMenu() { if (S.menu) { S.menu.remove(); S.menu = null; S.menuDe = null; if (S.menuBtn) S.menuBtn.setAttribute('aria-expanded', 'false'); } }
+function itensMenu(nome) {
+  const c = S.convs.get(S.sel);
+  if (nome === 'geral') return [
+    ...(isAdmin() ? [{ t: 'A.N.A.B e respostas prontas', icone: 'spark', f: () => { S.view = 'anab'; render(); } }, { t: 'Equipe', icone: 'users', f: () => { S.view = 'equipe'; render(); } }] : []),
+    { t: 'Minha conta', icone: 'user', f: () => { S.view = 'conta'; render(); } },
+    { t: 'Sair', icone: 'out', f: async () => { await API.sair(); location.reload(); } }];
+  if (nome === 'sim') return [{ t: 'Lead faz uma pergunta', f: () => API.simular('lead') }, { t: 'Lead manda um áudio', f: () => API.simular('audio') }, { t: 'Lead pede um atendente', f: () => API.simular('humano') }];
+  if (nome === 'conversa' && c) return [
+    { t: 'Ver ficha do contato', icone: 'user', f: () => acao('ficha') },
+    c.contato.tipo === 'lead' ? { t: 'Marcar como cliente', icone: 'check', f: () => acao('cliente') } : { t: 'Voltar para lead', icone: 'undo', f: () => acao('lead') },
+    ...(c.status !== 'encerrada' ? [{ t: 'Encerrar conversa', icone: 'x', perigo: true, f: () => acao('encerrar') }] : [])];
+  if (nome === 'rapidas') return S.respostas.map(r => ({ html: `<span class="rp"><b>${esc(r.titulo)}</b><small>${esc(r.texto)}</small></span>`, f: () => { const t = $('#txt'); if (!t) return; t.value = r.texto; t.dispatchEvent(new Event('input')); t.focus(); } }));
+  return [];
+}
+
+/* =====================================================================
+   lista de conversas
+   ===================================================================== */
+const ABAS = [['todas', 'Todas'], ['leads', 'Leads'], ['clientes', 'Clientes'], ['encerradas', 'Encerradas']];
+const GRUPOS = [['precisa_voce', 'Precisa de você'], ['humano', 'Em atendimento'], ['anab', 'A.N.A.B respondendo']];
+const leadNovo = k => k.tipo === 'lead' && k.criado_em && Date.now() - new Date(k.criado_em).getTime() < 864e5;
+const tipoTxt = k => k.tipo === 'cliente' ? 'Cliente' : leadNovo(k) ? 'Lead novo' : 'Lead';
+const tipoTagClaro = k => `<span class="tgc ${k.tipo === 'cliente' ? 'tgc-cli' : leadNovo(k) ? 'tgc-novo' : 'tgc-lead'}">${tipoTxt(k)}</span>`;
+const tipoTag = k => `<span class="tg ${k.tipo === 'cliente' ? 'tg-cli' : leadNovo(k) ? 'tg-novo' : 'tg-lead'}">${tipoTxt(k)}</span>`;
+function filtradas() {
+  const q = S.busca.toLowerCase().trim(), qd = q.replace(/\D/g, '');
+  return [...S.convs.values()].filter(c => {
+    if (S.filtro === 'leads' && c.contato.tipo !== 'lead') return false;
+    if (S.filtro === 'clientes' && c.contato.tipo !== 'cliente') return false;
+    if (S.filtro === 'encerradas' ? c.status !== 'encerrada' : c.status === 'encerrada') return false;
+    if (q && !(String(c.contato.nome || '').toLowerCase().includes(q) || (qd && c.contato.wa_id.includes(qd)) || String(c.ultima_msg_texto || '').toLowerCase().includes(q))) return false;
+    return true;
+  }).sort((a, b) => (b.status === 'precisa_voce') - (a.status === 'precisa_voce') || (b.ultima_msg_em || '').localeCompare(a.ultima_msg_em || ''));
+}
+function renderLista() {
+  const el = $('#lista'); if (!el) return;
+  if (!el.dataset.ok) {
+    el.dataset.ok = 1;
+    el.innerHTML = `<div class="lista-top">
+        <div class="t">${MARK}<h1>Conversas</h1><span class="sp"></span><span class="off" id="anabOff" hidden>A.N.A.B desligada</span>
+          <button type="button" class="ico-s" data-menu="geral" aria-label="Menu" aria-haspopup="menu" aria-expanded="false">${ic('dots')}</button></div>
+        <label class="busca">${ic('search')}<span class="sr">Buscar</span><input id="busca" type="search" placeholder="Buscar"></label>
+        <div class="abas" id="abas" role="tablist" aria-label="Filtrar conversas"></div>
+      </div>
+      <div class="itens" id="itens"></div>
+      ${DEMO ? `<div class="demo-pe"><span class="sp">Modo demonstração</span><button type="button" class="btn" data-menu="sim" aria-haspopup="menu" aria-expanded="false">Simular cliente</button></div>` : ''}`;
+    const b = $('#busca', el); b.value = S.busca;
+    b.addEventListener('input', debounce(e => { S.busca = e.target.value; renderItens(); }, 150));
+    $('#abas', el).addEventListener('click', e => { const t = e.target.closest('[data-f]'); if (!t) return; S.filtro = t.dataset.f; renderLista(); });
+    $('#itens', el).addEventListener('click', e => { const t = e.target.closest('[data-c]'); if (t) abrir(t.dataset.c); });
+  }
+  $('#anabOff', el).hidden = !(S.config && !S.config.anab_ativa);
+  $('#abas', el).innerHTML = ABAS.map(([k, l]) => `<button type="button" role="tab" data-f="${k}" aria-selected="${S.filtro === k}">${l}</button>`).join('');
+  renderItens();
+}
+function renderItens() {
+  const box = $('#itens'); if (!box) return;
+  const L = filtradas();
+  const item = c => {
+    const need = c.status === 'precisa_voce', un = c.nao_lidas && c.id !== S.sel;
+    const quem = c.status === 'humano' ? `<span class="tg tg-quem">${esc(c.atendente_id === S.eu.user_id ? 'Você' : nomeEquipe(c.atendente_id))}</span>` : '';
+    return `<button type="button" class="item${need ? ' need' : ''}" data-c="${c.id}" aria-current="${c.id === S.sel}">
+      <span class="av" aria-hidden="true" style="${avCor(c.contato)}">${esc(avTxt(c.contato))}</span>
+      <span class="c"><span class="l1"><span class="n">${esc(nomeC(c))}</span><span class="h">${esc(quando(c.ultima_msg_em))}</span></span>
+      <span class="l2"><span class="m${need ? ' need' : ''}">${esc(need ? (c.motivo || 'quer falar com a equipe') : c.ultima_msg_texto || '')}</span>${un ? `<span class="un" aria-label="${c.nao_lidas} não lidas">${c.nao_lidas}</span>` : ''}</span>
+      <span class="l3">${tipoTag(c.contato)}${quem}</span></span>
+    </button>`;
+  };
+  const sec = (t, n, cls) => `<div class="sec ${cls || ''}" role="heading" aria-level="2"><span>${t}</span><span class="sec-n">${n}</span></div>`;
+  box.innerHTML = !L.length ? '' : S.filtro === 'encerradas' ? L.map(item).join('')
+    : GRUPOS.map(([st, t]) => { const G = L.filter(c => c.status === st); return G.length ? sec(t, G.length, st === 'precisa_voce' ? 'sec-need' : '') + G.map(item).join('') : ''; }).join('');
+  if (!L.length) box.innerHTML = `<div class="vazio">${S.busca ? 'Nada encontrado.' : S.filtro === 'leads' ? 'Nenhum lead em aberto.' : S.filtro === 'clientes' ? 'Nenhum cliente pedindo ajuda agora.' : S.filtro === 'encerradas' ? 'Nenhuma conversa encerrada.' : S.convs.size ? 'Nenhuma conversa aberta.' : 'Ainda não chegou nenhuma mensagem.<br>Quando alguém escrever para o WhatsApp da Provintes, aparece aqui.'}</div>`;
+}
+
+/* =====================================================================
+   conversa aberta
+   ===================================================================== */
+async function abrir(id) {
+  S.sel = id; S.anexo = null; S.fichaAberta = false; fecharMenu();
+  $('#app').classList.add('em-chat');
+  renderItens(); renderChat(); renderFicha();
+  const c = S.convs.get(id);
+  if (!S.msgs.has(id)) { S.carregando.add(id); renderMsgs(); S.msgs.set(id, await API.mensagens(id)); S.carregando.delete(id); }
+  renderMsgs(true);
+  if (c && c.nao_lidas) { c.nao_lidas = 0; API.atualizarConversa(id, { nao_lidas: 0 }).catch(() => { }); renderItens(); }
+  if (innerWidth > 860) { const t = $('#txt'); if (t) t.focus({ preventScroll: true }); }
+}
+function estado(c) {
+  if (c.status === 'precisa_voce') return ['need', 'Chamou você · ' + (c.motivo || 'quer falar com a equipe')];
+  if (c.status === 'humano') return ['', c.atendente_id === S.eu.user_id ? 'Você está atendendo' : nomeEquipe(c.atendente_id) + ' está atendendo'];
+  if (c.status === 'encerrada') return ['', 'Conversa encerrada'];
+  return ['', 'A.N.A.B está respondendo'];
+}
+function renderChat() {
+  const el = $('#chat'); if (!el) return;
+  const c = S.convs.get(S.sel);
+  if (!c) { el.innerHTML = `<div class="vazio-chat">${MARK}<span>Escolha uma conversa na lista</span></div>`; return; }
+  const [cls, txt0] = estado(c);
+  const prim = c.status === 'precisa_voce' ? '<button type="button" class="btn pri pill-b" data-a="assumir">Assumir conversa</button>'
+    : c.status === 'anab' ? '<button type="button" class="btn pill-b" data-a="assumir">Assumir conversa</button>'
+      : c.status === 'humano' ? '<button type="button" class="btn pill-b" data-a="devolver">Devolver à A.N.A.B</button>'
+        : '<button type="button" class="btn pill-b" data-a="reabrir">Reabrir</button>';
+  el.innerHTML = `<header class="chat-top">
+      <button type="button" class="ico-s voltar" data-a="voltar" aria-label="Voltar para a lista">${ic('back')}</button>
+      <button type="button" class="who" data-a="ficha" title="Ver ficha"><span class="av" aria-hidden="true" style="${avCor(c.contato)}">${esc(avTxt(c.contato))}</span><span class="wt"><b>${esc(nomeC(c))} ${tipoTagClaro(c.contato)}</b><span class="st ${cls}"><i class="pt pt-${c.status}"></i>${esc(txt0)}</span></span></button>
+      <span class="sp"></span>${prim}
+      <button type="button" class="ico-s" data-menu="conversa" aria-label="Mais opções" aria-haspopup="menu" aria-expanded="false">${ic('dots')}</button>
+    </header>
+    <div class="msgs" id="msgs" aria-live="polite"></div>
+    <div class="comp" id="comp"></div>`;
+  renderComp();
+}
+function statusIcon(m) {
+  if (m.status === 'falhou') return `<span class="falhou" title="${esc(m.erro || '')}">Não enviada</span>`;
+  if (m.status === 'enviando') return `<span aria-label="Enviando">${ic('clock')}</span>`;
+  if (m.status === 'enviada') return `<span aria-label="Enviada">${ic('check')}</span>`;
+  return `<span class="${m.status === 'lida' ? 'lida' : ''}" aria-label="${m.status === 'lida' ? 'Lida' : 'Entregue'}">${ic('checks')}</span>`;
+}
+function corpo(m) {
+  let h = '';
+  if (m.tipo === 'template') h += '<div class="tpl">MENSAGEM-MODELO</div>';
+  if (m.tipo === 'imagem') h += `<img class="foto" data-midia="${esc(m.midia_path || '')}" alt="Foto">`;
+  else if (m.tipo === 'audio') h += `<audio controls preload="none" data-midia="${esc(m.midia_path || '')}"></audio>`;
+  else if (m.tipo === 'video') h += `<video controls preload="none" style="max-width:260px;border-radius:8px;display:block" data-midia="${esc(m.midia_path || '')}"></video>`;
+  else if (m.tipo === 'documento') h += `<a class="doc" target="_blank" rel="noopener" data-midia="${esc(m.midia_path || '')}" href="#">${ic('doc')}${esc(m.midia_nome || 'Arquivo')}</a>`;
+  if (m.erro && m.direcao === 'entrada') h += `<div class="falhou">${esc(m.erro)}</div>`;
+  if (m.texto) h += (h ? '<div style="margin-top:6px">' : '<div>') + esc(m.texto) + '</div>';
+  if (m.tipo === 'audio' && m.direcao === 'entrada') h += `<div class="trans"><small>TRANSCRIÇÃO</small>${m.transcricao ? esc(m.transcricao) : '<span style="opacity:.7">Sem transcrição</span>'}</div>`;
+  else if (m.tipo === 'audio' && m.transcricao) h += `<div class="trans"><small>TRANSCRIÇÃO</small>${esc(m.transcricao)}</div>`;
+  return h;
+}
+function renderMsgs(rolar) {
+  const box = $('#msgs'); if (!box) return;
+  const perto = box.scrollHeight - box.scrollTop - box.clientHeight < 120;
+  if (S.carregando.has(S.sel)) { box.innerHTML = '<div class="vazio">Carregando…</div>'; return; }
+  const L = S.msgs.get(S.sel) || []; let dia = '', h = '', antes = '';
+  for (const m of L) {
+    const d = diaDe(m.criado_em); if (d !== dia) { dia = d; antes = ''; h += `<div class="dia">${esc(d)}</div>`; }
+    if (m.direcao === 'sistema') { antes = ''; h += `<div class="sis">${esc(m.texto)} · ${hora(m.criado_em)}</div>`; continue; }
+    const cls = m.direcao === 'entrada' ? 'ent' : m.autor === 'anab' ? 'sai anab' : 'sai eq';
+    const chave = m.direcao + ':' + m.autor + ':' + (m.autor_id || '');
+    const novo = chave !== antes; antes = chave;
+    const quem = m.autor === 'anab' ? 'A.N.A.B' : m.autor === 'equipe' ? (m.autor_id === S.eu.user_id ? 'Você' : nomeEquipe(m.autor_id)) : '';
+    h += `<div class="b ${cls}${novo ? ' rabo' : ''}"><div class="bx">${novo && quem ? `<div class="autor">${esc(quem)}</div>` : ''}${corpo(m)}<span class="meta">${hora(m.criado_em)}${m.direcao === 'saida' ? statusIcon(m) : ''}</span></div></div>`;
+  }
+  box.innerHTML = h || '<div class="vazio">Sem mensagens ainda.</div>';
+  hidratar(box);
+  if (rolar || perto) box.scrollTop = box.scrollHeight;
+}
+function hidratar(box) {
+  box.querySelectorAll('[data-midia]').forEach(async el => {
+    const p = el.dataset.midia; if (!p) return;
+    try { const u = await API.urlMidia(p); if (el.tagName === 'A') el.href = u; else el.src = u; } catch { }
+    if (el.tagName === 'IMG') {
+      el.addEventListener('load', () => { const b = $('#msgs'); if (b && b.scrollHeight - b.scrollTop - b.clientHeight < 400) b.scrollTop = b.scrollHeight; }, { once: true });
+      el.addEventListener('click', () => { const lb = document.createElement('div'); lb.className = 'lb'; lb.innerHTML = `<img src="${esc(el.src)}" alt="Foto ampliada">`; lb.addEventListener('click', () => lb.remove()); document.body.appendChild(lb); });
+    }
+  });
+}
+
+/* ---------- caixa de escrever ---------- */
+function renderComp() {
+  const el = $('#comp'); if (!el) return;
+  const c = S.convs.get(S.sel); if (!c) return;
+  if (janela(c.ultima_entrada_em) <= 0) {
+    el.innerHTML = `<div class="fechada">${ic('clock')}<span class="sp">Já passaram 24 h desde a última mensagem de ${esc(primeiroNome(c))}. Pelo WhatsApp, agora só dá para mandar uma mensagem-modelo.</span><button type="button" class="btn pri" data-a="modelo">Mensagem-modelo</button></div>`;
+    return;
+  }
+  if (S.rec) {
+    el.innerHTML = `<div class="linha"><button type="button" class="ico-r" data-a="rec-cancelar" aria-label="Cancelar gravação" title="Cancelar">${ic('trash')}</button><div class="gravando" role="status"><span class="dot"></span><span>Gravando <span id="recT">0:00</span></span></div><button type="button" class="ico-r pri" data-a="rec-enviar" aria-label="Enviar áudio" title="Enviar áudio">${ic('send')}</button></div>`;
+    return;
+  }
+  el.innerHTML = `${S.anexo ? `<div class="anexo">${S.anexo.preview ? `<img src="${S.anexo.preview}" alt="">` : ic('doc')}<span class="sp" style="min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">${esc(S.anexo.nome)}</span><button type="button" class="ico-s" data-a="tirar-anexo" aria-label="Tirar anexo">${ic('x')}</button></div>` : ''}
+    <div class="linha">
+      <label class="ico-s" style="cursor:pointer" title="Anexar foto ou arquivo"><span class="sr">Anexar foto ou arquivo</span>${ic('clip')}<input type="file" id="arq" hidden accept="image/*,application/pdf,.pdf,.doc,.docx,.xls,.xlsx,.txt,video/mp4"></label>
+      ${S.respostas.length ? `<button type="button" class="ico-s" data-menu="rapidas" title="Respostas prontas" aria-label="Respostas prontas" aria-haspopup="menu" aria-expanded="false">${ic('zap')}</button>` : ''}
+      <label style="flex:1;display:flex;min-width:0"><span class="sr">Mensagem</span><textarea class="txt" id="txt" rows="1" placeholder="${S.anexo ? 'Legenda (opcional)' : 'Mensagem'}"></textarea></label>
+      <button type="button" class="ico-r" data-a="rec" id="bMic" aria-label="Gravar áudio" title="Gravar áudio">${ic('mic')}</button>
+      <button type="button" class="ico-r pri" data-a="enviar" id="bEnv" aria-label="Enviar" title="Enviar (Enter)" hidden>${ic('send')}</button>
+    </div>`;
+  const t = $('#txt', el);
+  const ajusta = () => { t.style.height = 'auto'; t.style.height = Math.min(160, t.scrollHeight) + 'px'; const tem = !!t.value.trim() || !!S.anexo; $('#bMic').hidden = tem; $('#bEnv').hidden = !tem; };
+  t.addEventListener('input', ajusta);
+  t.addEventListener('keydown', e => { if (e.key === 'Enter' && !e.shiftKey && !e.isComposing && innerWidth > 860) { e.preventDefault(); enviar(); } });
+  $('#arq', el).addEventListener('change', e => { const f = e.target.files[0]; if (!f) return; if (f.size > 16 * 1024 * 1024 && !/pdf|word|sheet|text/.test(f.type)) return toast('O WhatsApp aceita fotos e vídeos de até 16 MB.', true); S.anexo = { file: f, nome: f.name, mime: f.type || 'application/octet-stream', preview: f.type.startsWith('image/') ? URL.createObjectURL(f) : null }; renderComp(); $('#txt').focus(); });
+  ajusta();
+}
+async function enviar() {
+  const c = S.convs.get(S.sel); const t = $('#txt'); if (!c || !t) return;
+  const texto = t.value.trim(); if (!texto && !S.anexo) return;
+  const b = $('#bEnv'); b.disabled = true; const assumiu = c.status !== 'humano';
+  try {
+    if (S.anexo) { const a = S.anexo; await API.enviarMidia(c.id, a.file, { nome: a.nome, mime: a.mime, legenda: texto || null }); S.anexo = null; }
+    else await API.enviarTexto(c.id, texto);
+    renderComp(); $('#txt') && $('#txt').focus(); if (assumiu) toast('Você assumiu a conversa. A A.N.A.B fica quieta aqui.');
+  } catch (e) { toast(esc(e.message), true); b.disabled = false; }
+}
+
+/* ---------- gravação de áudio ---------- */
+async function gravar() {
+  if (!navigator.mediaDevices || !window.MediaRecorder) return toast('Este navegador não grava áudio. Tente o Chrome.', true);
+  let stream; try { stream = await navigator.mediaDevices.getUserMedia({ audio: { channelCount: 1, echoCancellation: true, noiseSuppression: true } }); }
+  catch { return toast('Permita o uso do microfone para gravar áudio.', true); }
+  const tipos = ['audio/ogg;codecs=opus', 'audio/webm;codecs=opus', 'audio/mp4', 'audio/webm'];
+  const mime = tipos.find(t => MediaRecorder.isTypeSupported(t)) || '';
+  const rec = new MediaRecorder(stream, mime ? { mimeType: mime, audioBitsPerSecond: 32000 } : undefined), partes = [];
+  rec.ondataavailable = e => e.data.size && partes.push(e.data);
+  S.rec = { rec, stream, partes, ini: Date.now(), mime: rec.mimeType || mime, timer: setInterval(() => { const s = Math.floor((Date.now() - S.rec.ini) / 1000); const el = $('#recT'); if (el) el.textContent = `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}`; if (s >= 300) pararGravacao(true); }, 250) };
+  rec.start(250); renderComp();
+}
+function pararGravacao(enviarDepois) {
+  const r = S.rec; if (!r) return; S.rec = null; clearInterval(r.timer);
+  r.rec.onstop = async () => {
+    r.stream.getTracks().forEach(t => t.stop());
+    renderComp();
+    if (!enviarDepois || Date.now() - r.ini < 700) return;
+    try {
+      let blob = new Blob(r.partes, { type: r.mime }), mime = r.mime.split(';')[0], nome = 'audio';
+      if (/webm/.test(mime)) { const o = window.webmParaOgg(await blob.arrayBuffer()); blob = o.blob; mime = 'audio/ogg'; }
+      nome += mime === 'audio/ogg' ? '.ogg' : mime === 'audio/mp4' ? '.m4a' : '.audio';
+      await API.enviarMidia(S.sel, blob, { nome, mime: mime === 'audio/ogg' ? 'audio/ogg; codecs=opus' : mime });
+    } catch (e) { toast('Não consegui enviar o áudio: ' + esc(e.message), true); }
+  };
+  r.rec.stop();
+}
+
+/* ---------- mensagem-modelo (fora das 24 h) ---------- */
+async function modalModelo() {
+  const c = S.convs.get(S.sel);
+  const m = document.createElement('div'); m.className = 'modal'; m.innerHTML = `<div class="card" role="dialog" aria-modal="true" aria-label="Mensagem-modelo"><h2>Mensagem-modelo</h2><p>Carregando os modelos aprovados pela Meta…</p></div>`;
+  document.body.appendChild(m); m.addEventListener('click', e => { if (e.target === m || e.target.closest('[data-fechar]')) m.remove(); });
+  let L; try { L = await API.modelos(); } catch (e) { m.querySelector('.card').innerHTML = `<h2>Mensagem-modelo</h2><div class="erro">${esc(e.message)}</div><button class="btn" data-fechar>Fechar</button>`; return; }
+  if (!L.length) { m.querySelector('.card').innerHTML = `<h2>Mensagem-modelo</h2><p>Ainda não há modelos aprovados. Crie um no Gerenciador do WhatsApp da Meta (WhatsApp Manager › Modelos de mensagem) e espere a aprovação.</p><button class="btn" data-fechar>Fechar</button>`; return; }
+  const card = m.querySelector('.card');
+  card.innerHTML = `<h2>Mensagem-modelo</h2><p>Escolha um modelo aprovado e preencha os campos.</p>
+    <label class="campo">Modelo<select class="in" id="mSel">${L.map((t, i) => `<option value="${i}">${esc(t.name)}</option>`).join('')}</select></label>
+    <div id="mCampos" style="display:flex;flex-direction:column;gap:10px"></div>
+    <div class="bx" id="mPrev" style="background:var(--soft);border-radius:12px;padding:12px;font-size:14px;white-space:pre-wrap"></div>
+    <div style="display:flex;gap:8px;justify-content:flex-end"><button class="btn" data-fechar>Cancelar</button><button class="btn pri" id="mEnv">${ic('send')}Enviar</button></div>`;
+  const vals = () => [...card.querySelectorAll('[data-p]')].map(i => i.value);
+  const prev = () => { const t = L[$('#mSel', card).value]; const v = vals(); $('#mPrev', card).textContent = t.texto.replace(/\{\{(\d+)\}\}/g, (_, n) => v[n - 1] || `[campo ${n}]`); };
+  const campos = () => { const t = L[$('#mSel', card).value]; $('#mCampos', card).innerHTML = Array.from({ length: t.params }, (_, i) => `<label class="campo">Campo ${i + 1}<input class="in" data-p="${i}" value="${i === 0 ? esc((c.contato.nome || '').split(' ')[0]) : ''}"></label>`).join(''); prev(); };
+  $('#mSel', card).addEventListener('change', campos); card.addEventListener('input', prev); campos();
+  $('#mEnv', card).addEventListener('click', async e => { e.target.disabled = true; try { const t = L[$('#mSel', card).value]; await API.enviarModelo(c.id, t, vals(), $('#mPrev', card).textContent); m.remove(); toast('Mensagem-modelo enviada'); } catch (x) { toast(esc(x.message), true); e.target.disabled = false; } });
+}
+
+
+
+/* =====================================================================
+   ficha do contato (gaveta)
+   ===================================================================== */
+function renderFicha() {
+  const el = $('#ficha'); if (!el) return;
+  const c = S.convs.get(S.sel);
+  el.classList.toggle('aberta', S.fichaAberta && !!c);
+  if (!c) { el.innerHTML = ''; return; }
+  const k = c.contato, ORIG = ['Instagram', 'Site', 'Indicação', 'Google', 'WhatsApp', 'Evento', 'Outro'];
+  el.innerHTML = `<div class="f-top"><h2>Ficha do contato</h2><span class="sp"></span><button type="button" class="ico-s" data-a="ficha" aria-label="Fechar ficha">${ic('x')}</button></div>
+    <div class="topo"><span class="av" aria-hidden="true" style="${avCor(k)}">${esc(avTxt(k))}</span>
+      <label style="width:100%"><span class="sr">Nome</span><input class="nome" id="kNome" value="${esc(k.nome || '')}" placeholder="Sem nome"></label>
+      <span class="tel">${esc(fone(k.wa_id))}</span>
+      <span class="pill ${k.tipo === 'cliente' ? 'p-cli' : 'p-lead'}">${k.tipo === 'cliente' ? 'Cliente' : 'Lead'}</span></div>
+    <label class="campo">Chegou por<select class="in" id="kOrig"><option value="">Não informado</option>${ORIG.map(o => `<option ${o === k.origem ? 'selected' : ''}>${o}</option>`).join('')}${k.origem && !ORIG.includes(k.origem) ? `<option selected>${esc(k.origem)}</option>` : ''}</select></label>
+    <label class="campo">Empresa<input class="in" id="kEmp" value="${esc(k.empresas || '')}" placeholder="Ex.: 3 lojas de roupa"></label>
+    <label class="campo"><span style="display:flex;justify-content:space-between">Anotações <span class="salvo" id="kSalvo" hidden>Salvo</span></span><textarea class="in" id="kNotas" rows="6" placeholder="O que combinou, próximo passo…">${esc(k.anotacoes || '')}</textarea></label>
+    <p class="f-info">Primeiro contato em ${esc(new Date(k.criado_em || c.criado_em).toLocaleDateString('pt-BR'))}.</p>`;
+  const salvar = debounce(async campos => { try { await API.atualizarContato(k.id, campos); const s = $('#kSalvo'); if (s) { s.hidden = false; setTimeout(() => s.hidden = true, 1500); } } catch (e) { toast(esc(e.message), true); } }, 600);
+  $('#kNome', el).addEventListener('change', e => { k.nome = e.target.value.trim() || null; salvar({ nome: k.nome }); renderItens(); const b = $('.wt b'); if (b) b.textContent = nomeC(c); });
+  $('#kOrig', el).addEventListener('change', e => { k.origem = e.target.value || null; salvar({ origem: k.origem }); });
+  $('#kEmp', el).addEventListener('input', e => { k.empresas = e.target.value; salvar({ empresas: k.empresas }); });
+  $('#kNotas', el).addEventListener('input', e => { k.anotacoes = e.target.value; salvar({ anotacoes: k.anotacoes }); });
+}
+
+/* =====================================================================
+   cliques e ações
+   ===================================================================== */
+document.addEventListener('click', e => {
+  const v = e.target.closest('[data-view]'); if (v) { S.view = v.dataset.view; render(); return; }
+  const mn = e.target.closest('[data-menu]');
+  if (mn) { const nome = mn.dataset.menu; if (S.menu && S.menuDe === nome) fecharMenu(); else abrirMenu(mn, itensMenu(nome), nome); return; }
+  const b = e.target.closest('[data-a]'); if (b) acao(b.dataset.a);
+});
+document.addEventListener('mousedown', e => {
+  if (S.menu && !S.menu.contains(e.target) && !e.target.closest('[data-menu]')) fecharMenu();
+  if (S.fichaAberta && !e.target.closest('#ficha') && !e.target.closest('[data-a="ficha"]') && !e.target.closest('.pop')) { S.fichaAberta = false; renderFicha(); }
+});
+document.addEventListener('keydown', e => {
+  if (e.key !== 'Escape') return;
+  if (S.menu) { const b = S.menuBtn; fecharMenu(); b && b.focus(); }
+  else if ($('.lb')) $('.lb').remove();
+  else if ($('.modal')) $('.modal').remove();
+  else if (S.fichaAberta) { S.fichaAberta = false; renderFicha(); }
+});
+async function acao(a) {
+  const c = S.convs.get(S.sel);
+  try {
+    if (a === 'voltar') { S.sel = null; S.fichaAberta = false; $('#app').classList.remove('em-chat'); renderItens(); renderChat(); renderFicha(); }
+    else if (a === 'ficha') { S.fichaAberta = !S.fichaAberta; renderFicha(); if (S.fichaAberta) setTimeout(() => { const n = $('#kNome'); n && n.focus({ preventScroll: true }); }, 50); }
+    else if (a === 'assumir') { await API.atualizarConversa(c.id, { status: 'humano', atendente_id: S.eu.user_id, motivo: null }); toast('Você assumiu. A A.N.A.B fica quieta nesta conversa.'); }
+    else if (a === 'devolver') { await API.atualizarConversa(c.id, { status: 'anab', atendente_id: null, motivo: null }); toast('A A.N.A.B voltou a responder esta conversa.'); }
+    else if (a === 'reabrir') await API.atualizarConversa(c.id, { status: 'anab', atendente_id: null });
+    else if (a === 'encerrar') { await API.atualizarConversa(c.id, { status: 'encerrada', atendente_id: null, motivo: null }); toast('Conversa encerrada. Se a pessoa escrever de novo, ela volta para a A.N.A.B.'); }
+    else if (a === 'cliente' || a === 'lead') {
+      if (a === 'cliente' && !confirm('Marcar como cliente?\n\nPor privacidade, as conversas de clientes com a A.N.A.B deixam de aparecer aqui. Elas só voltam quando o cliente pedir ajuda de uma pessoa.')) return;
+      await API.atualizarContato(c.contato.id, { tipo: a }); c.contato.tipo = a;
+      if (a === 'cliente' && !['precisa_voce', 'humano'].includes(c.status)) { S.convs.delete(c.id); S.sel = null; S.fichaAberta = false; render(); toast('Marcado como cliente.'); }
+      else { renderItens(); renderFicha(); toast(a === 'cliente' ? 'Marcado como cliente.' : 'Voltou a ser lead.'); }
+    }
+    else if (a === 'enviar') enviar();
+    else if (a === 'tirar-anexo') { S.anexo = null; renderComp(); }
+    else if (a === 'rec') gravar();
+    else if (a === 'rec-cancelar') pararGravacao(false);
+    else if (a === 'rec-enviar') pararGravacao(true);
+    else if (a === 'modelo') modalModelo();
+  } catch (x) { toast(esc(x.message), true); }
+}
+
+/* =====================================================================
+   configurações
+   ===================================================================== */
+async function telaAnab(box) {
+  const cfg = S.config = await API.config(); S.respostas = await API.respostas();
+  box.innerHTML = `<h1>A.N.A.B</h1>
+    <section class="card"><label class="sw"><input type="checkbox" id="cAtiva" ${cfg.anab_ativa ? 'checked' : ''}><span><b>A.N.A.B responde os leads</b><small>Desligada, todas as mensagens esperam alguém da equipe.</small></span></label></section>
+    <section class="card"><h2>O que ela sabe sobre a Provintes</h2>
+      <p>Ela responde só com base neste texto. Mudou um preço ou um plano? Edite aqui e salve.</p>
+      <textarea class="in" id="cSabe" rows="10">${esc(cfg.anab_conhecimento || '')}</textarea>
+      <label class="campo">Avisar no meu WhatsApp quando ela chamar a equipe (opcional)<input class="in" id="cAlerta" inputmode="tel" placeholder="Ex.: 5577999999999" value="${esc(cfg.alerta_numero || '')}"></label>
+      <div><button type="button" class="btn pri" id="cSalvar">Salvar</button></div></section>
+    <section class="card"><h2>Respostas prontas</h2><p>Ficam no botão ${ic('zap').replace('class="i"', 'class="i" style="width:15px;height:15px;vertical-align:-2px"')} ao lado da caixa de mensagem.</p>
+      <div id="rLista"></div>
+      <div class="grid2"><label class="campo">Título<input class="in" id="rTit" placeholder="Ex.: Como funciona"></label><label class="campo">Texto<textarea class="in" id="rTxt" rows="2"></textarea></label></div>
+      <div><button type="button" class="btn" id="rAdd">Adicionar resposta</button></div></section>`;
+  const lista = () => { $('#rLista').innerHTML = S.respostas.map(r => `<div class="rr"><div class="sp"><b>${esc(r.titulo)}</b><p>${esc(r.texto)}</p></div><button type="button" class="ico-s" data-rdel="${r.id}" aria-label="Apagar ${esc(r.titulo)}">${ic('trash')}</button></div>`).join('') || '<p>Nenhuma resposta pronta ainda.</p>'; };
+  lista();
+  $('#cAtiva').addEventListener('change', async e => { try { await API.salvarConfig({ anab_ativa: e.target.checked }); S.config.anab_ativa = e.target.checked; toast(e.target.checked ? 'A.N.A.B ligada' : 'A.N.A.B desligada'); } catch (x) { toast(esc(x.message), true); } });
+  $('#cSalvar').addEventListener('click', async () => { try { await API.salvarConfig({ anab_conhecimento: $('#cSabe').value, alerta_numero: $('#cAlerta').value.replace(/\D/g, '') || null }); toast('Salvo'); } catch (x) { toast(esc(x.message), true); } });
+  $('#rAdd').addEventListener('click', async () => { const titulo = $('#rTit').value.trim(), texto = $('#rTxt').value.trim(); if (!titulo || !texto) return toast('Preencha título e texto.', true); try { await API.salvarResposta({ titulo, texto }); S.respostas = await API.respostas(); $('#rTit').value = $('#rTxt').value = ''; lista(); } catch (x) { toast(esc(x.message), true); } });
+  box.onclick = async e => { const d = e.target.closest('[data-rdel]'); if (!d || !confirm('Apagar esta resposta pronta?')) return; try { await API.apagarResposta(d.dataset.rdel); S.respostas = await API.respostas(); lista(); } catch (x) { toast(esc(x.message), true); } };
+}
+async function telaEquipe(box) {
+  S.equipe = await API.equipe();
+  box.innerHTML = `<h1>Equipe</h1>
+    <section class="card"><h2>Quem entra no painel</h2><div>${S.equipe.map(p => `<div class="rr" style="align-items:center"><span class="av" aria-hidden="true">${esc(ini(p.nome))}</span><div class="sp" style="min-width:0"><b>${esc(p.nome)}${p.user_id === S.eu.user_id ? ' (você)' : ''}</b><p>${esc(p.email)}${p.ativo ? '' : ' · desativado'}</p></div>
+        ${p.user_id === S.eu.user_id ? `<span class="pill p-gray">${p.papel === 'admin' ? 'Administrador(a)' : 'Atendente'}</span>` : `<label><span class="sr">Acesso de ${esc(p.nome)}</span><select class="in" data-papel="${p.user_id}"><option value="admin" ${p.papel === 'admin' ? 'selected' : ''}>Administrador(a)</option><option value="atendente" ${p.papel !== 'admin' ? 'selected' : ''}>Atendente</option></select></label><button type="button" class="btn" data-ativo="${p.user_id}" data-v="${p.ativo ? 0 : 1}">${p.ativo ? 'Desativar' : 'Reativar'}</button>`}</div>`).join('')}</div>
+      <p><b>Administrador(a)</b> mexe na A.N.A.B, nas respostas prontas e na equipe. <b>Atendente</b> só responde conversas.</p></section>
+    <section class="card"><h2>Adicionar pessoa</h2>
+      <div class="grid2"><label class="campo">Nome<input class="in" id="eNome"></label><label class="campo">E-mail<input class="in" id="eEmail" type="email"></label></div>
+      <label class="campo">Acesso<select class="in" id="ePapel"><option value="atendente">Atendente</option><option value="admin">Administrador(a)</option></select></label>
+      <div><button type="button" class="btn pri" id="eAdd">Adicionar</button></div><div id="eRes"></div></section>`;
+  $('#eAdd').addEventListener('click', async e => {
+    e.target.disabled = true;
+    try { const r = await API.convidar($('#eNome').value.trim(), $('#eEmail').value.trim(), $('#ePapel').value); $('#eRes').innerHTML = `<p style="background:var(--ok-soft);color:var(--ok);padding:12px;border-radius:10px">Pronto! Senha provisória: <b style="font-family:monospace;font-size:16px">${esc(r.senha)}</b>. Mande para a pessoa por um canal seguro e peça para trocar no primeiro acesso.</p>`; }
+    catch (x) { toast(esc(x.message), true); } e.target.disabled = false;
+  });
+  box.onchange = async e => { const s = e.target.closest('[data-papel]'); if (!s) return; try { await API.mudarPapel(s.dataset.papel, s.value); toast('Acesso alterado'); } catch (x) { toast(esc(x.message), true); } };
+  box.onclick = async e => { const b = e.target.closest('[data-ativo]'); if (!b) return; try { await API.mudarAtivo(b.dataset.ativo, b.dataset.v === '1'); telaEquipe(box); } catch (x) { toast(esc(x.message), true); } };
+}
+function telaConta(box) {
+  box.innerHTML = `<h1>Minha conta</h1>
+    <section class="card"><h2>${esc(S.eu.nome)}</h2><p>${esc(S.eu.email)} · ${S.eu.papel === 'admin' ? 'Administrador(a)' : 'Atendente'}</p></section>
+    <section class="card"><h2>Avisos no computador</h2><p>Receba um aviso quando a A.N.A.B chamar a equipe, mesmo com o painel em outra aba.</p><div><button type="button" class="btn" id="nPerm">Ativar avisos</button></div></section>
+    <section class="card"><h2>Trocar senha</h2>
+      <div class="grid2"><label class="campo">Nova senha<input class="in" type="password" id="s1" autocomplete="new-password"></label><label class="campo">Repita a nova senha<input class="in" type="password" id="s2" autocomplete="new-password"></label></div>
+      <div><button type="button" class="btn" id="sTroca">Trocar senha</button></div></section>
+    <div><button type="button" class="btn" id="sSair">${ic('out')}Sair do painel</button></div>`;
+  $('#sTroca').addEventListener('click', async () => { const a = $('#s1').value; if (a.length < 8) return toast('A senha precisa de pelo menos 8 caracteres.', true); if (a !== $('#s2').value) return toast('As senhas não são iguais.', true); try { await API.trocarSenha(a); $('#s1').value = $('#s2').value = ''; toast('Senha trocada'); } catch (x) { toast(esc(x.message), true); } });
+  $('#nPerm').addEventListener('click', async () => { if (!('Notification' in window)) return toast('Este navegador não mostra avisos.', true); const p = await Notification.requestPermission(); toast(p === 'granted' ? 'Pronto! Você recebe um aviso quando a A.N.A.B chamar a equipe.' : 'Os avisos ficaram bloqueados.', p !== 'granted'); });
+  $('#sSair').addEventListener('click', async () => { await API.sair(); location.reload(); });
+}
+
+/* =====================================================================
+   tempo real
+   ===================================================================== */
+async function aoMudar(tipo, o) {
+  if (!o) return;
+  if (tipo === 'mensagem') {
+    const L = S.msgs.get(o.conversa_id); if (!L) return;
+    const i = L.findIndex(m => m.id === o.id); if (i >= 0) L[i] = { ...L[i], ...o }; else L.push(o);
+    if (o.conversa_id === S.sel) renderMsgs();
+    return;
+  }
+  if (tipo === 'contato') { for (const c of S.convs.values()) if (c.contato.id === o.id) Object.assign(c.contato, o); renderItens(); return; }
+  const antes = S.convs.get(o.id);
+  const nova = await API.conversa(o.id);               // já respeita a regra de privacidade
+  if (!nova) { S.convs.delete(o.id); if (S.sel === o.id) { S.sel = null; render(); } else renderItens(); titulo(); return; }
+  S.convs.set(nova.id, nova);
+  if (nova.status === 'precisa_voce' && (!antes || antes.status !== 'precisa_voce')) avisar(nova);
+  if (nova.id === S.sel && nova.nao_lidas) { nova.nao_lidas = 0; API.atualizarConversa(nova.id, { nao_lidas: 0 }).catch(() => { }); }
+  if (S.view === 'conversas') {
+    renderLista();
+    if (nova.id === S.sel && (!antes || antes.status !== nova.status || antes.atendente_id !== nova.atendente_id || antes.motivo !== nova.motivo || (janela(antes.ultima_entrada_em) <= 0) !== (janela(nova.ultima_entrada_em) <= 0))) {
+      const t = $('#txt'), v = t && t.value, foco = t && document.activeElement === t;
+      renderChat(); renderMsgs(true);
+      const t2 = $('#txt'); if (t2 && v) { t2.value = v; t2.dispatchEvent(new Event('input')); } if (t2 && foco) t2.focus();
+    }
+  }
+  titulo();
+}
+function avisar(c) {
+  bip(); toast(`<b>${esc(nomeC(c))}</b> chamou você: ${esc(c.motivo || '')}`);
+  try { if (document.hidden && Notification.permission === 'granted') { const n = new Notification('Provintes · chamou você', { body: `${nomeC(c)}: ${c.motivo || ''}` }); n.onclick = () => { focus(); S.view = 'conversas'; render(); abrir(c.id); }; } } catch { }
+}
+
+/* =====================================================================
+   início
+   ===================================================================== */
+async function iniciar() {
+  if (!(await API.sessao())) return telaLogin();
+  S.eu = await API.eu();
+  if (!S.eu || !S.eu.ativo) { await API.sair(); return telaLogin('Sua conta ainda não foi liberada no painel. Fale com a administradora.'); }
+  const [convs, cfg, resp, eq] = await Promise.all([API.conversas(), API.config().catch(() => null), API.respostas().catch(() => []), API.equipe().catch(() => [])]);
+  S.config = cfg; S.respostas = resp; S.equipe = eq;
+  S.convs = new Map(convs.map(c => [c.id, c]));
+  casca(); render();
+  API.assinar(aoMudar);
+  setInterval(() => { if (S.view !== 'conversas' || !S.sel || S.rec) return; const c = S.convs.get(S.sel); if (c && janela(c.ultima_entrada_em) <= 0 && !$('.fechada')) renderComp(); }, 60e3);
+}
+iniciar().catch(e => { console.error(e); telaLogin('Não consegui conectar ao servidor. Confira a internet e tente de novo.'); });
+
+})();
+</script>
+</body>
+</html>
